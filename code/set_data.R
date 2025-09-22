@@ -13,9 +13,9 @@ names(data_raw)
 
 # Codebook ---------------------------------------------------------------------
 # 2 bateries are duplicated but differ in details. 
-# Different versions for full=time and combined students? 
+# Different versions for full=time and combined students
 # But the situations battery is identical in both versions
-# The shorted version is identified by dupli == 1
+# The shorter version is identified by dupli == 1
 
 codebook = tibble(orig = names(data_raw),
                   nr = 1:ncol(data_raw)
@@ -25,12 +25,13 @@ codebook = tibble(orig = names(data_raw),
          orig = str_replace(orig, "Prostor pro komentář:", "Prostor pro komentář"),
          orig = str_replace(orig, "Comment section:", "Comment section "),
          name = case_when(nr < 11 ~ make.names(orig),
-                          nr == 11 ~ "cz_en"),
+                          nr == 11 ~ "lang"),
          label = str_remove(orig, ".*:"),
          label = case_when(nr == 82 ~ "Jak hodnotíte tyto výroky?", 
                            TRUE ~ label),
          lab = case_when(str_detect(orig, ":") ~ str_extract(orig, "^[^:]+")),
-         en = case_when(str_detect(orig_low, paste(c("the", "from", "you", "faculty", "study", "section", "gender"), collapse = "|")) ~ 1, 
+         en = case_when(name =="lang" ~ 0,
+                        str_detect(orig_low, paste(c("the", "from", "you", "faculty", "study", "section", "gender"), collapse = "|")) ~ 1, 
                         TRUE ~ 0),
          name = case_when(nr %in% c(78:82, 96:100) ~ "research",
                           str_detect(orig, "hodnotíte tyto výroky|evaluate the following statements") ~ "study",
@@ -74,21 +75,79 @@ data_cz_en = data_raw %>%
   set_names(codebook$name)
 nrow(data_cz_en)
 
-# Split cz and en version
-data_cz = data_cz_en %>% 
-  select(!starts_with("en_"))
-names(data_cz)
+# Nr of missings
+ncol(data_cz_en)
 
-data_en = data_cz_en %>% 
-  select(starts_with("en_"), XXX) %>% 
-  set_names(names(data_cz))
+data_cz_en = data_cz_en %>% 
+  mutate(na_count = rowSums(is.na(.)))
+ex1(data_cz_en, na_count)
 
+xx = data_cz_en %>% 
+  arrange(desc(na_count)) %>% 
+  relocate(na_count)
 
-
+# Drop empty questionnaires
+data_cz_en = data_cz_en %>% 
+  filter(na_count < 182) 
+  
 nrow(data_cz_en)
 
+# Split + bind cz and en version ------------------------------------------------------
+data_cz = data_cz_en %>% 
+  filter(lang == "česky") %>% 
+  select(!starts_with("en_"))
+names(data_cz)
+nrow(data_cz)
+
+data_en = data_cz_en %>% 
+  filter(lang == "english") %>% 
+  select(all_of(names(data_cz)[1:11]), starts_with("en_")) 
+names(data_en) = str_remove(names(data_en), "en_")
+nrow(data_en)
+
+# Harmonize cz and en vars
+nrow(data_cz_en)
+data = data_cz %>% 
+  bind_rows(data_en) %>% 
+  mutate(form = case_when(str_detect(form, "Full|Prez") ~ "Prezenční",
+                          str_detect(form, "Combi|Kombi") ~ "Kombinovaná"),
+         fak = case_when(str_detect(fak, "Applied") ~ "FAV",
+                         str_detect(fak, "of Arts") ~ "FDU",
+                         str_detect(fak, "Economics") ~ "FEK",
+                         str_detect(fak, "Electrical") ~ "FEL",
+                         TRUE ~ fak)
+         )
+nrow(data)
+
+# Split + bind prez and kombi form ---------------------------------------------
+ex1(data, form)
+ex2(data, form, dupli_study_1)
+ex2(data, form, study_1)
+
+dupli_cols = data %>% 
+  select(starts_with("dupli")) %>% 
+  names() %>% 
+  str_remove("dupli_")
+
+data = data %>% 
+  mutate(across(all_of(dupli_cols), ~ case_when(form == "Kombinovaná" ~ get(sub("study_", "dupli_study_", cur_column())), 
+                                                TRUE ~ .)))
+  
+ex2(data, form, study_1)
+ex2(data, form, study_7)
+
+# Explo ------------------------------------------------------------------------
+ex1(data, fak)
+
+data %>% 
+  filter(!is.na(prog)) %>% 
+  pull(prog)
 
 # Save -------------------------------------------------------------------------
+save(data, codebook,
+     file = "data/data_phd.RData")
+
+# Export open comments ---------------------------------------------------------
 
 
 
