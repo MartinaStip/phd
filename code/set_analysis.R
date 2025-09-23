@@ -14,6 +14,4 @@ h = 9 * sizeadj
 
 # Single vars
 
-
-
 # MC

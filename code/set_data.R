@@ -105,18 +105,20 @@ data_en = data_cz_en %>%
 names(data_en) = str_remove(names(data_en), "en_")
 nrow(data_en)
 
-# Harmonize cz and en vars
+
 nrow(data_cz_en)
 data = data_cz %>% 
-  bind_rows(data_en) %>% 
+  bind_rows(data_en) 
+
+# Harmonize cz and en version of form and fak ----------------------------------
+data = data_cz %>% 
   mutate(form = case_when(str_detect(form, "Full|Prez") ~ "Prezenční",
                           str_detect(form, "Combi|Kombi") ~ "Kombinovaná"),
          fak = case_when(str_detect(fak, "Applied") ~ "FAV",
                          str_detect(fak, "of Arts") ~ "FDU",
                          str_detect(fak, "Economics") ~ "FEK",
                          str_detect(fak, "Electrical") ~ "FEL",
-                         TRUE ~ fak)
-         )
+                         TRUE ~ fak))
 nrow(data)
 
 # Split + bind prez and kombi form ---------------------------------------------
@@ -131,10 +133,36 @@ dupli_cols = data %>%
 
 data = data %>% 
   mutate(across(all_of(dupli_cols), ~ case_when(form == "Kombinovaná" ~ get(sub("study_", "dupli_study_", cur_column())), 
-                                                TRUE ~ .)))
-  
+                                                TRUE ~ .))) %>% 
+  select(!starts_with("dupli"))
+
 ex2(data, form, study_1)
 ex2(data, form, study_7)
+
+# Harmonize cz and en version of form and fak ----------------------------------
+names(data)
+data = data %>% 
+  mutate(across(starts_with("study_"), ~ case_match(., "Strongly Agree" ~ "Zcela souhlasím",
+                                                    "Somewhat Agree" ~ "Spíše souhlasím",
+                                                    "Strongly Disagree" ~ "Zcela nesouhlasím",
+                                                    "Somewhat Disagree" ~ "Spíše nesouhlasím",
+                                                    "Neutral" ~ "Tak napůl",
+                                                    .default = . )))
+
+
+# Single
+ex1(data, solution)
+ex1(data, finance)
+
+# Batteries
+ex1(data, study_1)
+ex1(data, condition_1)
+ex1(data, competence_1)
+ex1(data, research_1)
+
+# MC
+ex1(data, info_1)
+ex1(data, situation_1)
 
 # Explo ------------------------------------------------------------------------
 ex1(data, fak)
@@ -143,11 +171,31 @@ data %>%
   filter(!is.na(prog)) %>% 
   pull(prog)
 
+
+ex1(data, study_1)
+
+# Open comments ---------------------------------------------------------
+open = data %>% 
+  select(starts_with("open"), gender, form, prog, fak) %>% 
+  select(!open_situation) %>% 
+  mutate(na_open_count = rowSums(across(starts_with("open"), ~ is.na(.))),
+         across(everything(), ~ replace_na(., "")),
+         tag = paste0(gender, " ", form, " ", fak, " ", prog)) %>% 
+  filter(na_open_count < 4) %>% 
+  select(tag, starts_with("open"))
+
+
 # Save -------------------------------------------------------------------------
-save(data, codebook,
+save(data, codebook, open,
      file = "data/data_phd.RData")
 
-# Export open comments ---------------------------------------------------------
+write.xlsx(open, "data/phd_quali.xlsx", sheetName = "open answers") 
 
+open2 = open %>% 
+  select(-tag) %>% 
+  t() %>% 
+  as.data.frame() %>%
+  select(where(~ !all(is.na(.)))) %>% 
+  set_names(open$tag)
 
 
