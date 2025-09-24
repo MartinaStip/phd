@@ -41,7 +41,7 @@ uwb_vals = list(
   )
 
 # Default theme ----------------------------------------------------------------
-theme_uwb <- function(){ 
+theme_uwb = function(){ 
   # Font
   font = uwb_vals$font 
   theme_minimal() %+replace%    #replace elements we want to change
@@ -66,13 +66,15 @@ theme_uwb <- function(){
       strip.text = element_text(size = uwb_vals$tsize, family = uwb_vals$font, margin = margin(b = 1.5)),
       #strip.text = element_textbox_simple(size = uwb_vals$tsize, family = uwb_vals$font, hjust = 0.5, lineheight = uwb_vals$lineheight), # This does not increase space for facet labels, use labeller = label_wrap_gen(multi_line = TRUE, width = 30) inside the facet_wrap()
       axis.title = element_text(color = uwb_vals$axiscol, size = uwb_vals$tsize, family = font),
-      axis.text = element_text(size = uwb_vals$tsize, family = uwb_vals$font, lineheight = uwb_vals$lineheight),
-      axis.text.y = element_text(color = uwb_vals$axiscol, lineheight = uwb_vals$lineheight)
+      axis.text =  ggtext::element_markdown(size = uwb_vals$tsize, family = uwb_vals$font, lineheight = uwb_vals$lineheight),
+      axis.text.y = ggtext::element_markdown(color = uwb_vals$axiscol)
     )
 }
 
+axis.text.x = ggtext::element_markdown()
+
 # Horizontal theme (flipped axes) ----------------------------------------------
-theme_uwb_horiz=function() {
+theme_uwb_horiz = function() {
   theme_uwb() %+replace% 
     theme(
       #panel.grid.major.y = element_blank(),
@@ -82,6 +84,6 @@ theme_uwb_horiz=function() {
       axis.text.y = element_text(color = "black"),
       axis.text.x = element_text(color = uwb_vals$axiscol),
       axis.ticks.y = element_blank(),
-      axis.ticks.x = element_line(color = uwb_vals$axiscol, linetype = "solid", size = uwb_vals$linesize)
+      axis.ticks.x = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize)
     )
 } 

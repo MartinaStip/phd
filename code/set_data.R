@@ -61,12 +61,14 @@ data = data_cz %>%
 # Harmonize cz and en version of form and fak ----------------------------------
 data = data %>% 
   mutate(form = case_when(str_detect(form, "Full|Prez") ~ "Prezenční",
-                          str_detect(form, "Combi|Kombi") ~ "Kombinovaná"),
+                          str_detect(form, "Combi|Kombi") ~ "Kombinovaná") %>% 
+           fct_rev(),
          fak = case_when(str_detect(fak, "Applied") ~ "FAV",
                          str_detect(fak, "of Arts") ~ "FDU",
                          str_detect(fak, "Economics") ~ "FEK",
                          str_detect(fak, "Electrical") ~ "FEL",
-                         TRUE ~ fak))
+                         TRUE ~ fak) %>%  
+           as.factor())
 nrow(data)
 
 # Split + bind prez and kombi form ---------------------------------------------
@@ -87,30 +89,8 @@ data = data %>%
 ex2(data, form, study_1)
 ex2(data, form, study_7)
 
-# Harmonize cz and en version of vars ------------------------------------------
-names(data)
-data = data %>% 
-  mutate(across(starts_with("study_"), ~ case_match(., "Strongly Agree" ~ "Zcela souhlasím",
-                                                    "Somewhat Agree" ~ "Spíše souhlasím",
-                                                    "Strongly Disagree" ~ "Zcela nesouhlasím",
-                                                    "Somewhat Disagree" ~ "Spíše nesouhlasím",
-                                                    "Neutral" ~ "Tak napůl",
-                                                    .default = . )))
-
-
-# Single
-ex1(data, solution)
-ex1(data, finance)
-
-# Batteries
-ex1(data, study_1)
-ex1(data, condition_1)
-ex1(data, competence_1)
-ex1(data, research_1)
-
-# MC
-ex1(data, info_1)
-ex1(data, situation_1)
+# Harmonize cz and en version of vars + factor levels --------------------------
+source("code/d_harmon.R", encoding = "UTF-8")
 
 # Explo ------------------------------------------------------------------------
 ex1(data, fak)
@@ -123,27 +103,28 @@ data %>%
 ex1(data, study_1)
 
 # Open comments ---------------------------------------------------------
-open = data %>% 
-  select(starts_with("open"), gender, form, prog, fak) %>% 
-  select(!open_situation) %>% 
-  mutate(na_open_count = rowSums(across(starts_with("open"), ~ is.na(.))),
-         across(everything(), ~ replace_na(., "")),
-         tag = paste0(gender, " ", form, " ", fak, " ", prog)) %>% 
-  filter(na_open_count < 4) %>% 
-  select(tag, starts_with("open"))
+# open = data %>% 
+#   select(starts_with("open"), gender, form, prog, fak) %>% 
+#   select(!open_situation) %>% 
+#   mutate(na_open_count = rowSums(across(starts_with("open"), ~ is.na(.))),
+#          across(everything(), ~ replace_na(., "")),
+#          tag = paste0(gender, " ", form, " ", fak, " ", prog)) %>% 
+#   filter(na_open_count < 4) %>% 
+#   select(tag, starts_with("open"))
 
 
 # Save -------------------------------------------------------------------------
-save(data, codebook, open,
+save(data, codebook, 
+     #open,
      file = "data/data_phd.RData")
 
-write.xlsx(open, "data/phd_quali.xlsx", sheetName = "open answers") 
-
-open2 = open %>% 
-  select(-tag) %>% 
-  t() %>% 
-  as.data.frame() %>%
-  select(where(~ !all(is.na(.)))) %>% 
-  set_names(open$tag)
+# write.xlsx(open, "data/phd_quali.xlsx", sheetName = "open answers") 
+# 
+# open2 = open %>% 
+#   select(-tag) %>% 
+#   t() %>% 
+#   as.data.frame() %>%
+#   select(where(~ !all(is.na(.)))) %>% 
+#   set_names(open$tag)
 
 

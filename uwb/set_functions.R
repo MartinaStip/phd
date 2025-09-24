@@ -80,9 +80,9 @@ generate_textlabs = function(dat, round_places = 0){
 generate_xvar = function(dat){
   xdat = dat %>% 
     mutate(#xvar = as.factor(paste0(str_wrap(xvarno, uwb_vals$chrnum),"\nn=",sum(n)))
-           xvar = case_when(nsize < 20 ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
-                            nsize < 30 ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
-                            TRUE ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
+           xvar = case_when(nsize < 20 ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
+                            nsize < 30 ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
+                            TRUE ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
                             ) %>% fct_relevel(as.numeric(xvar))
            )
 }
@@ -443,9 +443,7 @@ plot_lolli = function(dat, horiz=TRUE){
          subtitle = d$subtitle[1],
          caption = d$caption[1]) +
     scale_x_discrete(labels = label_wrap(uwb_vals$chrnum)) +
-    theme_uwb() + theme(axis.ticks.y = element_blank(),
-                      #axis.line.y = element_blank(),
-                      #axis.text.y = element_blank()
+    theme_uwb() + theme(axis.ticks.y = element_blank()
                       )
   if(horiz){
     p=p + coord_flip() +
@@ -464,13 +462,13 @@ plot_lolli = function(dat, horiz=TRUE){
 #' @export
 #'
 #' @examples
-plot_bar = function(dat, horiz=TRUE){
+plot_bar = function(dat, horiz = TRUE){
   if (horiz){
     d=dat %>% mutate(xvar = fct_rev(xvar))
     } else {
       d=dat
   }
-  p=ggplot(d,aes(y = yvar,x = xvar)) +
+  p = ggplot(d,aes(y = yvar,x = xvar)) +
     geom_bar(stat = "identity", width = 0.85,colour = uwb_vals$barcol,fill = d$cvar) +
     geom_text(aes(x = xvar, y = pos_single, label = labvar_single),
               colour = d$cvar_text, size=uwb_vals$labsize) +

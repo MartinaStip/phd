@@ -19,7 +19,7 @@ source("code/a_single.R", encoding = "UTF-8")
 
 
 # Batteries
-
+source("code/a_bat.R", encoding = "UTF-8")
 
 
 

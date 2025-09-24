@@ -10,8 +10,8 @@ library(tidyverse)
 library(ggtext) # More options for text elements in plots
 library(plotwidgets) # Color conversions
 library(ggsankey)
+library(scales) # For automatic line breaks in axis labels
 
-#library(scales) # Allows automatic line breaks in axis labels
 #library(sysfonts)
 #library(showtext)
 #library(patchwork)

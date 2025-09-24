@@ -13,7 +13,9 @@ codebook = tibble(orig = names(data_raw),
          name = case_when(nr < 11 ~ make.names(orig),
                           nr == 11 ~ "lang"),
          label = str_remove(orig, ".*:"),
+         label = str_remove(label, "\\.{3}.*"),
          label = case_when(nr == 82 ~ "Jak hodnotíte tyto výroky?", 
+                           nr == 164 ~ "Je podle Vás výše finanční podpory (doktorská či jiná stipendia, granty, odměny za výuku) dostatečná?",  
                            TRUE ~ label),
          lab = case_when(str_detect(orig, ":") ~ str_extract(orig, "^[^:]+")),
          en = case_when(name =="lang" ~ 0,
@@ -63,4 +65,6 @@ codebook = codebook %>%
                            name == "gender" ~ "Gender",
                            name == "form" ~ "Forma studia",
                            TRUE ~ label))
+
+
 
