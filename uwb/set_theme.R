@@ -1,27 +1,48 @@
 # THEMES FOR FIGURES 
 # created by Martina, 8/2024
 
-library(ggtext) #allows automatic line breaks in titles
-library(scales) #allows automatic line breaks in axis labels
+#p_wid=15
+#p_hei=9
 
-# Font and sizes of text elements in theme and plots are set in set_all.R
+# Colors are defined in set_colors
 
-p_wid=15
-p_hei=9
+# Fonts and sizes --------------------------------------------------------------
 
-# rests ------------------------------------------------------------------------
-# width of figures in inches 
-#p_wid=7.5 #to fit A4 page
-#p_hei=4.5 #cca proportional to ppt slide with width 7.5 (dimensions of ppt slide are 10 x 5.6)
+# Set uwbvals for theme and plot functions -------------------------------------
+# font_add("Franklin Gothic", "C:/Windows/Fonts/Franklin Gothic/framd.ttf")
+tsize = 20
 
-# Font for plots DORESIT, JESTLI TO CHCEME--------------------------------------
-#library(showtext)
-#font_add_google("Roboto", family = "Roboto")
-#showtext_auto()
+uwb_vals = list(
+  # Font
+  font = "Franklin Gothic",
+  #font = "open sans",
+  # Text sizes
+  tsize = tsize, # main text size; influences theme and labsizes
+  labsize = (tsize) / .pt, # size of text labels in plots 
+  chrnum = 30, # number of characters before line break in axis labels
+  lineheight_tit = 1, # space between lines in titlea and subtitle labels
+  lineheight = 0.75, # space between lines in axis labels
+  # Position of text labels
+  lim_single_pos = 5, # Position of text label inside vs. outside bar in barplots
+  lim_stack_no = 5, # Whether text labels is printed in a stacked barplot
+  # Line and point sizes
+  axissize = 0.25, # Width of axes
+  linesize = 1, # Width of lines in a line plot
+  pointsize = 15, # size of circles in lollipop, scatter and trend plots
+  # Line colors (except palettes that go into aes)
+  barcol = "white", # Outline of bars
+  gridcol = "gray85", # Plot grid
+  lollistick = "gray35",
+  axiscol = 'grey35', # Color for axis is muted because values are labelled 
+  # color of N sizes: very small, small, enough
+  c_nsize1 = "#c73a3a",
+  c_nsize2 = "#944e4e",
+  c_nsize3 = "grey35"
+  )
 
-##################themes
+# Default theme ----------------------------------------------------------------
 theme_uwb <- function(){ 
-  #font
+  # Font
   font = uwb_vals$font 
   theme_minimal() %+replace%    #replace elements we want to change
     theme(
@@ -50,6 +71,7 @@ theme_uwb <- function(){
     )
 }
 
+# Horizontal theme (flipped axes) ----------------------------------------------
 theme_uwb_horiz=function() {
   theme_uwb() %+replace% 
     theme(

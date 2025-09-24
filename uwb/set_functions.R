@@ -2,11 +2,7 @@
 # reference to variable names in dplyr works differently in functions
 # https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html
 
-# Values defined in uwb_vals:
-  # uwb_vals$labsize
-  # uwb_vals$pointsize 
-  # uwb_vals$chrnum
-  # uwb_vals$font
+# Values are defined in uwb_vals:
 
 ################NOTES FOR PACKAGE/IMPROVEMENTS
 # check entering parameters + print error messages in the beginning of the functions
@@ -39,7 +35,6 @@ ex1 = function(dat, var){
                               axis.line.x = element_blank(),
                               axis.text.x = element_blank())
   return(p)
-  #return(vartitle)
 }
 
 # Visual crosstabulation of two vars (var1 goes into rows) #SOMETHING IS WRONG
@@ -81,52 +76,17 @@ generate_textlabs = function(dat, round_places = 0){
     )
 }
 
-clean_overplotting = function(dat, labvar, yvar, idvar, grvar, overplot_diff) {
-  d = dat %>%
-    group_by({{grvar}}) %>%
-    arrange({{grvar}}, desc({{yvar}})) %>%
-    mutate(keep = ifelse({{yvar}} == max({{yvar}}), 1, NA),  # keep the max value
-           y_last = NA) 
-  
-  for (g in levels(dat %>% pull({{grvar}}))) {
-    # idvar levels in order by yvar
-    ordered = d %>%
-      filter({{grvar}} == g) %>%
-      pull({{idvar}})
-    
-    for (i in ordered) {
-      d = d %>%
-        mutate(y_last = case_when({{grvar}} == g & is.na(y_last) & lag(keep) == 1 ~ lag({{yvar}}),
-                                  TRUE ~ y_last),
-               y_lag = y_last - {{yvar}},
-               keep = case_when({{idvar}} == i & y_lag >= overplot_diff ~ 1,
-                       {{idvar}} == i & y_lag < overplot_diff ~ 0,
-                       TRUE ~ keep))
-      for (j in 2:length(ordered)){
-      #for (j in 2:3){
-        d = d %>%
-          mutate(y_last = case_when({{grvar}} == g & is.na(y_last) & lag(keep, n = 1) == 0 & lag(keep, n = j) == 1 ~ lag({{yvar}}, n = j),
-                                    TRUE ~ y_last),
-                 y_lag = y_last - {{yvar}},
-                 keep = case_when({{idvar}} == i & y_lag >= overplot_diff ~ 1,
-                                  {{idvar}} == i & y_lag < overplot_diff ~ 0,
-                                  TRUE ~ keep))
-      }
-      # d = d %>%
-      #   mutate(y_lag = y_last - {{yvar}},
-      #          keep = case_when({{idvar}} == i & y_lag >= overplot_diff ~ 1,
-      #                           {{idvar}} == i & y_lag < overplot_diff ~ 0,
-      #                           TRUE ~ keep))
-
-    }
-  }
-  d = d %>% 
-    mutate(labvar_clean = case_when(keep == 1 ~ {{labvar}},
-                                  keep == 0 ~ NA))
-  return(d)
+# Generate xvar from xvarno and nsize
+generate_xvar = function(dat){
+  xdat = dat %>% 
+    mutate(#xvar = as.factor(paste0(str_wrap(xvarno, uwb_vals$chrnum),"\nn=",sum(n)))
+           xvar = case_when(nsize < 20 ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
+                            nsize < 30 ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
+                            TRUE ~ paste0("<div>", xvarno, "</div><div style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
+                            ) %>% fct_relevel(as.numeric(xvar))
+           )
 }
-
-
+  
 # REMOVE N = FROM XVAR - USE IT AS AN OPTION FOR PLOTS?
 
 # Prep functions ---------------------------------------------------------------
@@ -152,6 +112,8 @@ prep_single = function(dat, var, order = FALSE, drop_na = TRUE){
   if (order) {
     single = single %>% mutate(xvar = fct_reorder(xvar, -n))
   }
+  single = single %>% 
+    mutate(subtitle = paste0("N=", nsize))
   return(single)
 }
 
@@ -167,13 +129,14 @@ prep_gr = function(dat, var, grvar, drop_na = TRUE,
     group_by({{grvar}}) %>% 
     count({{var}}, .drop = FALSE) %>% 
     mutate(yvar = n/sum(n)*100,
-           xvar = as.factor(paste0(str_wrap({{grvar}}, 25),"\nn=",sum(n))),
-           xvarno = {{grvar}})
+           xvarno = {{grvar}}
+           #xvar = as.factor(paste0(str_wrap({{grvar}}, 25),"\nn=",sum(n))),
+           )
   if (add_total) {
     total = dat %>% drop_na({{var}})  %>% 
       count({{var}}, .drop = FALSE) %>% 
       mutate(yvar = n/sum(n)*100,
-             xvar = as.factor(paste0(lab_total, "\nn=", sum(n))),
+             #xvar = as.factor(paste0(lab_total, "\nn=", sum(n))),
              xvarno = lab_total)
     groups = bind_rows(groups, total)
   }
@@ -186,6 +149,7 @@ prep_gr = function(dat, var, grvar, drop_na = TRUE,
            nsize = sum(n),
            zvar = {{var}}
            ) %>%  
+    generate(xvar) %>% 
     generate_textlabs() %>% 
     impute_labs() %>% 
     ungroup() 

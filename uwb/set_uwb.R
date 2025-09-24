@@ -7,27 +7,25 @@
   # sources scripts for theme, color palletes, and functions. 
 
 library(tidyverse)
-library(ggtext) # Allows automatic line breaks in titles
-library(scales) # Allows automatic line breaks in axis labels
-library(sysfonts)
-library(showtext)
+library(ggtext) # More options for text elements in plots
+library(plotwidgets) # Color conversions
 library(ggsankey)
 
-font_add_google(name = "Open Sans", family = "open sans")
+#library(scales) # Allows automatic line breaks in axis labels
+#library(sysfonts)
+#library(showtext)
+#library(patchwork)
+#library(extrafont)
+#library(extrafontdb)
 
 #font_add("Franklin Gothic", "C:/Windows/Fonts/Franklin Gothic/framd.ttf")
 #showtext_auto()
 
-load("uwb/uwb.RData") 
-uwb_vals$font = "Franklin Gothic"
+load("uwb/uwb.RData") # uwb.RData is created in a_uwb_objects.R in the kvalita-manual repo
 
-
-# uwb.RData is created in a_uwb_objects.R in the kvalita-manual repo
-# uwbvals may be customized here to alter the visual style
-
-source("uwb/set_theme.R", encoding = "UTF-8") 
-source("uwb/set_colors.R", encoding = "UTF-8")
-source("uwb/set_functions.R", encoding = "UTF-8")
+source("uwb/set_palettes.R", encoding = "UTF-8") # Defines all palettes and palette functions
+source("uwb/set_theme.R", encoding = "UTF-8") # Defines fonts, sizes and other visual elements, uses objects defined in set_palettes.R
+source("uwb/set_functions.R", encoding = "UTF-8") # Defines data prep and plot functions, uses objects defined in set_palettes.R and set_theme.R
 
 
 # Notes about text sizes -------------------------------------------------------
@@ -41,3 +39,7 @@ source("uwb/set_functions.R", encoding = "UTF-8")
 
 #library(systemfonts)
 #print(systemfonts::system_fonts(), n = Inf)
+
+
+# Old code ---------------------------------------------------------------------
+#font_add_google(name = "Open Sans", family = "open sans")
