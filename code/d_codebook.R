@@ -36,7 +36,7 @@ codebook = tibble(orig = names(data_raw),
                           nr %in% c(127, 144, 162, 180) ~ "open_situation",
                           nr %in% c(128, 145, 163, 181) ~ "solution",
                           nr %in% c(146, 164) ~ "finance",
-                          nr %in% c(182, 183) ~ "general",
+                          nr %in% c(182, 183) ~ "open_general",
                           nr %in% c(184, 188) ~ "gender",
                           nr %in% c(185, 189)  ~ "fak",
                           nr %in% c(186, 190)  ~ "prog",
@@ -64,7 +64,12 @@ codebook = codebook %>%
   mutate(title = case_when(name == "fak" ~ "Fakulta doktorského studia",
                            name == "gender" ~ "Gender",
                            name == "form" ~ "Forma studia",
-                           TRUE ~ label))
+                           TRUE ~ label),
+         lab_orig = lab,
+         lab = str_remove(lab, "\\([^)]*\\)") %>% str_remove("\\."),
+         lab = case_when(name %in% c("study_8", "study_9") ~ paste0(lab, "*"),
+                         TRUE ~ lab),
+         lab_short = lab)
 
 
 

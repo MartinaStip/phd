@@ -10,6 +10,11 @@ w = 15 * sizeadj
 h = 9 * sizeadj
 
 
+# Texts for plots
+cap_prez = "* Tuto položku hodnotili pouze studující v prezenční formě"
+
+
+
 # Response rate - cube
 
 # Single vars ------------------------------------------------------------------

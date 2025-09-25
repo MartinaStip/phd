@@ -1,14 +1,12 @@
 # Identify bat items
 
-batnames = c("study", "research")
+batnames = c("study", "condition", "competence", "research")
 
 batvars = map(batnames, ~ codebook %>% 
                 filter(!str_detect(name, "en_|dupli_")) %>% 
                 filter(str_detect(name, paste0(.x, "_"))) %>% 
                 pull(name)) %>% 
   set_names(batnames)
-
-codebook
 
 # # Remove R with all misssings in a the battery question
 # allmissing = map(batvars, ~ zcu %>% 
@@ -25,10 +23,12 @@ codebook
 # )
 
 # Data 
-batdata = map(batvars, ~ prep_bat(data, vars = .x) %>%
+batdata = map(batvars, ~ prep_bat(data, vars = .x, show_nsize = TRUE) %>%
                  #arrange(desc(zvar), yvar) %>%
                  mutate(ord = lab %>% as_factor(),
-                        xvar = str_wrap(xvar, uwb_vals$chrnum) %>% as_factor, 
+                        #xvar = str_wrap(xvar, uwb_vals$chrnum) %>% as_factor, 
+                        caption = case_when(str_detect(name,"study") ~ cap_prez, 
+                                            TRUE ~ NA)
                         #xvar = fct_reorder(str_wrap(xvar, uwb_vals$chrnum), as.numeric(ord)),
                         #subtitle = case_when(subtitle == "" ~ paste0("N=", nsize),
                          #                    TRUE ~ paste0(subtitle, ", N=", nsize)),
@@ -39,6 +39,8 @@ names(batdata) = batnames
 # Plots
 batscales = list(
   study = c(uwb_palettes(name = "bi", type='continuous', n = 5, add_na = T)),
+  condition = c(uwb_palettes(name = "bi", type='continuous', n = 5, add_na = T)),
+  competence = c(uwb_palettes(name = "bi", type='continuous', n = 5, add_na = T)),
   research = c(uwb_palettes(name = "bi", type='continuous', n = 5, add_na = T))
 )
 
@@ -49,6 +51,8 @@ batplots = map2(batdata, batnames, ~ plot_stack(.x) +
                   #theme(legend.margin = margin(l = -.3, unit = "npc"))
                 ) 
 batplots$study
+
+#windows()
 
 #walk(batdata, ~ print(nrow(.x)))
 

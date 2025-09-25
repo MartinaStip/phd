@@ -80,14 +80,15 @@ generate_textlabs = function(dat, round_places = 0){
 generate_xvar = function(dat){
   xdat = dat %>% 
     mutate(#xvar = as.factor(paste0(str_wrap(xvarno, uwb_vals$chrnum),"\nn=",sum(n)))
-           xvar = case_when(nsize < 20 ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
-                            nsize < 30 ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
-                            TRUE ~ paste0(xvarno, "<span style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
-                            ) %>% fct_relevel(as.numeric(xvar))
+           xvar = case_when(nsize < 20 ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
+                            nsize < 30 ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
+                            TRUE ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
+                            ) %>% 
+             #fct_relevel(as.numeric(xvarno))
+             as_factor()
            )
 }
   
-# REMOVE N = FROM XVAR - USE IT AS AN OPTION FOR PLOTS?
 
 # Prep functions ---------------------------------------------------------------
 # Prep perc data of single var (N instead of percent as an option?)
@@ -286,24 +287,38 @@ prep_mc_long_faks = function(dat) {
 
 # Batteries data prep
 # Dat is wide data, it is pivoted longer inside the function
-prep_bat = function(dat, vars=names(dat), drop_na = TRUE, order = FALSE) {
-  bat = dat 
-  # if (drop_na) {
-  #   bat = bat %>% drop_na({{var}})
-  # }
+
+prep_bat = function(dat, vars = names(dat), drop_na = TRUE, show_nsize = FALSE) {
+  #levels = dat %>% pull(vars[1]) %>% levels()
+  
+  bat = dat %>% 
+    pivot_longer(cols = all_of(vars)) 
+  
+  if (drop_na) {
+    bat = bat %>% drop_na(value)
+  }
+  
   bat = bat %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
     group_by(name) %>% 
     count(value,.drop = FALSE) %>%
     mutate(yvar = n/sum(n)*100,
            xvar = name,
            zvar = value,
-           nsize=sum(n)) %>% 
+           nsize = sum(n)) %>% 
     filter(yvar > 0) %>% 
     generate_textlabs() %>% 
     impute_labs() %>% 
     ungroup()  
+  
   bat = try(bat %>% mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
+  bat = bat %>% mutate(xvar = as.factor(xvar))
+  
+  if (show_nsize) {
+    bat = bat %>% 
+      rename(xvarno = xvar) %>% 
+      generate_xvar() 
+  }
+  
   return(bat)
 }
 

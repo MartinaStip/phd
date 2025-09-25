@@ -3,8 +3,9 @@
 rm(list = ls())
 source("uwb/set_uwb.R")
 
-library(xlsx)
+
 library(readxl)
+library(writexl)
 #library(janitor)
 #library(stringi)
 
@@ -89,6 +90,12 @@ data = data %>%
 ex2(data, form, study_1)
 ex2(data, form, study_7)
 
+# Dataset to analyse nonresponse
+missing = data %>% 
+  mutate(across(everything(), ~ case_when(is.na(.) ~ 1, 
+                                        TRUE ~ 0)))
+
+
 # Harmonize cz and en version of vars + factor levels --------------------------
 source("code/d_harmon.R", encoding = "UTF-8")
 
@@ -103,19 +110,29 @@ data %>%
 ex1(data, study_1)
 
 # Open comments ---------------------------------------------------------
-# open = data %>% 
-#   select(starts_with("open"), gender, form, prog, fak) %>% 
-#   select(!open_situation) %>% 
-#   mutate(na_open_count = rowSums(across(starts_with("open"), ~ is.na(.))),
-#          across(everything(), ~ replace_na(., "")),
-#          tag = paste0(gender, " ", form, " ", fak, " ", prog)) %>% 
-#   filter(na_open_count < 4) %>% 
-#   select(tag, starts_with("open"))
-
+open = data %>%
+  select(starts_with("open"), gender, form, prog, fak) %>%
+  select(!open_situation) %>%
+  mutate(id = row_number(),
+         na_open_count = rowSums(across(starts_with("open"), ~ is.na(.))),
+         across(everything(), ~ na_if(as.character(.), "Bez odpovědi")), 
+         across(everything(), ~ replace_na(., "")),
+         person_info = paste0(gender, " ", form, " ", fak, " ", prog)) %>%
+  filter(na_open_count < 5) %>%
+  select(id, person_info, starts_with("open")) %>% 
+  pivot_longer(cols = starts_with("open"), names_to = "item", values_to = "answer") %>% 
+  filter(answer != "") %>% 
+  group_by(id) %>% 
+  mutate(row_nr = row_number(),
+         person_info = case_when(row_nr == 1 ~ person_info,
+                                 TRUE ~ "")) %>% 
+  ungroup() %>% 
+  select(-c(row_nr))
+  
+writexl::write_xlsx(list("open answers" = open), "data/phd_quali_data.xlsx") 
 
 # Save -------------------------------------------------------------------------
-save(data, codebook, 
-     #open,
+save(data, missing, codebook, open,
      file = "data/data_phd.RData")
 
 # write.xlsx(open, "data/phd_quali.xlsx", sheetName = "open answers") 
