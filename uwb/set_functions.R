@@ -195,7 +195,7 @@ prep_gr2 = function(dat, var, grvar, grvar2, drop_na = TRUE,
 }
 
 # Multiple choice data prep (= batttery with 2 options: chosen vs. not chosen) 
-# dodelat drop_na
+# dodelat drop_na = vyhodit lidi, kteri nic nevybrali
 prep_mc = function(dat, vars=names(dat), chosen, drop_na = TRUE, order = FALSE) {
   mc = dat
   # if (drop_na) {
@@ -442,15 +442,15 @@ mean_bat_gr2 = function(dat, vars, grvar, grvar2, round_places = 0,
 #' @export
 #'
 #' @examples
-plot_lolli = function(dat, horiz=TRUE){
+plot_lolli = function(dat, horiz = TRUE){
   if(horiz){
-    d=dat %>% mutate(xvar = fct_rev(xvar))
+    d = dat %>% mutate(xvar = fct_rev(xvar))
     } else {
-      d=dat
+      d = dat
     }
-  p = ggplot(d,aes(y=yvar,x=xvar)) +
-    geom_segment(aes(x = xvar, xend = xvar, y = 0, yend = yvar), colour=uwb_vals$lollistick) +
-    geom_point(size = uwb_vals$pointsize, shape=21, color = "white", fill= d$cvar) +
+  p = ggplot(d, aes(y = yvar, x = xvar)) +
+    geom_segment(aes(x = xvar, xend = xvar, y = 0, yend = yvar), colour = uwb_vals$lollistick) +
+    geom_point(size = uwb_vals$pointsize, shape = 21, color = "white", fill = d$cvar) +
     geom_text(aes(x = xvar, y = yvar, label = labvar_single),
               colour = "white", size = uwb_vals$labsize) +
     labs(y = "%", x = "",

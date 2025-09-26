@@ -15,22 +15,36 @@ cap_prez = "* Tuto položku hodnotili pouze studující v prezenční formě"
 
 
 
-# Response rate - cube
 
-# Single vars ------------------------------------------------------------------
+
+# Identify sets of vars
+# MC items ---------------------------------------------------------------------
+mcnames = c("info", "situation")
+
+mcvars = map(mcnames, ~ codebook %>% 
+               filter(!str_detect(name, "en_|dupli_")) %>% 
+               filter(str_detect(name, paste0(.x, "_"))) %>% 
+               pull(name)) %>% 
+  set_names(mcnames)
+
+
+# Response rate + analysis of nonresponse by item
+source("code/a_response.R", encoding = "UTF-8")
+
+# Single vars 
 source("code/a_single.R", encoding = "UTF-8")
 
 # MC
+source("code/a_mc.R", encoding = "UTF-8")
 
-
-# Batteries
+# Batteries 
 source("code/a_bat.R", encoding = "UTF-8")
-
 
 
 # library(ggplot2)
 # library(ggtext)
-# 
+# # 
+# options(device = function(...) ragg::agg_png(..., res = 72))
 # df <- data.frame(x = 1:2, y = c(3, 5))
 # ggplot(df, aes(x, y)) +
 #   geom_point(size = 5) +
@@ -42,3 +56,8 @@ source("code/a_bat.R", encoding = "UTF-8")
 #   theme_minimal() +
 #   theme(axis.text.x = ggtext::element_markdown())
 # 
+# ggsave("test_plot.png", width = 6, height = 4, dpi = 300)
+# dev.new(type = "cairo")  
+
+
+

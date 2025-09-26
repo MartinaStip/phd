@@ -135,13 +135,5 @@ writexl::write_xlsx(list("open answers" = open), "data/phd_quali_data.xlsx")
 save(data, missing, codebook, open,
      file = "data/data_phd.RData")
 
-# write.xlsx(open, "data/phd_quali.xlsx", sheetName = "open answers") 
-# 
-# open2 = open %>% 
-#   select(-tag) %>% 
-#   t() %>% 
-#   as.data.frame() %>%
-#   select(where(~ !all(is.na(.)))) %>% 
-#   set_names(open$tag)
 
 
