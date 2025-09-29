@@ -1,0 +1,31 @@
+% Make Franklin Gothic the default family everywhere
+\renewcommand{\familydefault}{\sfdefault}
+
+% Headings
+\setkomafont{chapter}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{section}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subsection}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subsubsection}{\bfseries\fontspec{Franklin Gothic Medium}}
+
+% Title block
+\setkomafont{title}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subtitle}{\bfseries\fontspec{Franklin Gothic Medium}}
+
+% Page headers and footers
+\setkomafont{pagehead}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{pagenumber}{\fontspec{Franklin Gothic Book}}
+
+% Captions
+\setkomafont{caption}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{captionlabel}{\bfseries\fontspec{Franklin Gothic Book}}
+\usepackage{caption}
+\captionsetup[figure]{skip=3pt}
+
+% TOC (use tocloft instead of KOMA fonts)
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\bfseries\fontspec{Franklin Gothic Medium}}
+\renewcommand{\cftsecfont}{\fontspec{Franklin Gothic Book}}
+\renewcommand{\cftsubsecfont}{\fontspec{Franklin Gothic Book}}
+
+% space between top of page and heading
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0pt}}

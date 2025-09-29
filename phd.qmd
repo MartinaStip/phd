@@ -1,0 +1,73 @@
+---
+title: | 
+  | ![](odbor_kvality.png){width=7cm}
+  |  
+  |  
+  |
+  | Šetření studujících v doktorských programech 2024/25
+  
+author: 
+  - Martina Štípková 
+  - Gabriela Fatková
+  - František Kalvas 
+  
+format: 
+  # html:
+  #  page-layout: full
+  pdf:
+    pdf-engine: lualatex
+    # pdf-engine: xelatex
+    documentclass: scrreprt
+    number-sections: true
+    fig-pos: H
+    include-in-header: settings_pdf.tex
+
+metadata-files: 
+  - settings.yml
+
+---
+
+```{r include = F}
+#rm(list = ls())
+#source("uwb/set_uwb.R")
+#load("data/data_erasmus.RData")
+```
+
+# Úvod
+
+Toto je zpráva z pilotního šetření studujících v doktorských studijních programech. Dotázáni byli studující ve všech ročnících. Protože se jedná o první šetření svého druhu, zařadili jsme do dotazníku více prostoru pro otevřené odpovědi k jednotlivým tématickým blokům, aby se studující mohli vyjádřit vlastními slovy v případě, že by nabízené možnosti nepokrývaly všechny aspekty, které nám chtějí sdělit. Kvalitativní analýza těchto odpovědí je klíčovou součástí výsledků. Při jejich interpretaci je ale nutné mít na paměti, že vypisovat otevřený komentář vyžaduje větší úsilí, než vybrat z nabízených možností. Toto úsilí vyvinou zejména studující, kteří jsou s některým aspektem svého studia velmi nespokojeni, nebo mají naopak velkou motivaci něco pochválit.
+
+# Hlavní zjištění
+
+
+# Návranost šetření a charakteristika vzorku
+
+Šetření mělo bohužel velmi malou návratnost. Z 551 oslovených dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **14 %**. Je možné že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá fakt, že naprostá většina studujících neuvedla svůj studijní program. Další identifikační údaje (fakulta, gender) neuvedlo kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
+
+
+
+
+# Hodnocení konkrétních aspektů studia 
+
+## Charakteristika a podmínky studia
+
+## Získávání kompetencí
+
+## Tvůrčí činnost
+
+## Sociální bezpečí
+
+![](figs/situation.png){#fig-situation}
+
+
+# Celkové hodnocení - silné a slabé stránky doktorského studia  
+
+Z otevřených odpovědí vyplývá následující shrnutí toho, co studující na svých doktorských studiích oceňují, a co jim naopak přijde problematické.
+
+##  Silné stránky doktorského studia
+
+Doktorské studium je oceňováno zejména pro svobodu bádání, možnost rozvíjet vlastní výzkum. Studující si cení flexibility studijního plánu a otevřenosti k individuálním potřebám.  
+
+## Slabé stránky doktorského studia
+
+Nedostatečné finanční ohodnocení nutí studenty hledat další zaměstnání a omezuje prostor pro výzkum. Slabá systémová podpora, roztříštěná organizace a nejasné či proměnlivé požadavky vedou k nerovnoměrné zatěži doktorandů, nejistotě a snížené motivaci k dokončení studia. 

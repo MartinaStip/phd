@@ -9,8 +9,11 @@
 library(tidyverse)
 library(ggtext) # More options for text elements in plots
 library(plotwidgets) # Color conversions
+# install.packages("remotes")
+# remotes::install_github("davidsjoberg/ggsankey")
 library(ggsankey)
 library(scales) # For automatic line breaks in axis labels
+library(glue)
 
 #library(sysfonts)
 #library(showtext)

@@ -1,5 +1,3 @@
-
-
 # Missing answers for each var -------------------------------------------------
 mnames = names(missing)
 
@@ -8,7 +6,7 @@ allmissing_mc = map(mcvars, ~ data %>%
                    select(Id.respondenta, all_of(.x)) %>% 
                    rowwise() %>% 
                    mutate(nr_missing = sum(is.na(across(everything())))) %>% 
-                   select(-.x) %>% 
+                   select(-all_of(.x)) %>% 
                    filter(nr_missing == length(.x)) %>% 
                    pull(Id.respondenta)
                    )
@@ -29,7 +27,7 @@ missing_sum = missing %>%
                           TRUE ~ lab) %>% as_factor(),
          labvar_single = round(yvar),
          cvar = uwb_scales$quali[1],
-         title = paste0("Procento odpovídajících, kteří na danou otázku <span style='color:", uwb_scales$quali[1], "' NEODPOVĚDĚLI</span>"),
+         title = glue("Procento odpovídajících, kteří na danou otázku <span style = 'color:{uwb_scales$quali[1]}'>NEODPOVĚDĚLI</span>"),
          #title = paste0("Procento odpovídajících, kteří na danou otázku <span style='color:blue' NEODPOVĚDĚLI</span>"),
          subtitle = "Pořadí odpovídá pořadí otázek v dotazníku") %>% 
   distinct()
@@ -56,10 +54,7 @@ nonresponse = plot_lolli(missing_closed) +
 nonresponse
 ggsave(nonresponse, file = "figs/nonresponse.png", width = w, height = h + 8)
 
-nonresponse_open = plot_lolli(missing_open)
+nonresponse_open = plot_lolli(missing_open) + 
+  theme(plot.title = element_markdown())
 nonresponse_open
 ggsave(nonresponse_open, file = "figs/nonresponse_open.png", width = w, height = h)
-
-
-
-

@@ -2,7 +2,7 @@
 # reference to variable names in dplyr works differently in functions
 # https://cran.r-project.org/web/packages/dplyr/vignettes/programming.html
 
-# Values are defined in uwb_vals:
+# Values are defined in uwb_vals
 
 ################NOTES FOR PACKAGE/IMPROVEMENTS
 # check entering parameters + print error messages in the beginning of the functions
@@ -11,10 +11,10 @@
 # To be used for data exploration and recoding
 # Single distribution of a var (preferably categorical var or numeric var with few values)
 ex1 = function(dat, var){
-  nsize_listwise = nrow(dat %>% drop_na({{var}}))
-  vartitle = names(dat %>% select({{var}}))
-  exx1=dat %>% 
-    count({{var}},.drop=FALSE) %>% 
+  nsize_listwise = nrow(dat |> drop_na({{var}}))
+  vartitle = names(dat |> select({{var}}))
+  exx1=dat |> 
+    count({{var}},.drop=FALSE) |> 
     mutate(yvar_n=n,
            yvar=n/sum(n)*100,
            xvar = as_factor({{var}}),
@@ -39,7 +39,7 @@ ex1 = function(dat, var){
 
 # Visual crosstabulation of two vars (var1 goes into rows) #SOMETHING IS WRONG
 ex2=function(dat,var1,var2){
-  exx2=dat %>% 
+  exx2=dat |> 
     count({{var1}},{{var2}}) 
   p=ggplot(exx2,aes(y={{var1}},x={{var2}})) +
     geom_tile(aes(alpha=n),fill="#eff34d") +
@@ -52,10 +52,10 @@ ex2=function(dat,var1,var2){
 # Impute labs from codebook/fill empty names
 impute_labs = function(dat) {
   if (exists("codebook")) {
-    dat = dat %>% left_join(codebook)
+    dat = dat |> left_join(codebook)
   } 
   else {
-    dat = dat %>%
+    dat = dat |>
       mutate(title = "",
              subtitle = "",
              caption = "")
@@ -63,7 +63,7 @@ impute_labs = function(dat) {
 }
 # Generate vars to be used for geom_text
 generate_textlabs = function(dat, round_places = 0){
-  labdat = dat %>% 
+  labdat = dat |> 
     mutate(
       labvar_full = round(yvar, round_places),
       labvar_single = ifelse(yvar < 0.5, "<1", paste0(labvar_full, "")), # for plotting in barplots with single columns
@@ -76,17 +76,28 @@ generate_textlabs = function(dat, round_places = 0){
     )
 }
 
-# Generate xvar from xvarno and nsize
-generate_xvar = function(dat){
-  xdat = dat %>% 
-    mutate(#xvar = as.factor(paste0(str_wrap(xvarno, uwb_vals$chrnum),"\nn=",sum(n)))
-           xvar = case_when(nsize < 20 ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize1, ">n=", nsize, "</span>"),
-                            nsize < 30 ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize2, ">n=", nsize, "</span>"), 
-                            TRUE ~ paste0(xvarno, "<br><span style = 'color:'", uwb_vals$c_nsize3, ">n=", nsize, "</span>") 
-                            ) %>% 
-             #fct_relevel(as.numeric(xvarno))
-             as_factor()
-           )
+# Generate xvar from xvar_df and optionally nsize
+# xvar_df = default, basic text version as foung in the data set
+# xvar_nr = level number, to be used for reordering the modified version
+# xvar = final version that goes to the plot (wrapped or not, with or without nsize)
+generate_xvar = function(dat, wrap = TRUE, chrnum = uwb_vals$chrnum, nsize = TRUE){
+  xdat = dat |> 
+    mutate(xvar = case_when(is.factor(xvar_df)== 0 ~ as_factor(xvar_df),
+          TRUE ~ as_factor(xvar_df)),
+        xvar_nr = as.numeric(xvar))
+  if (wrap) {
+    xdat = xdat |> 
+      mutate(xvar = str_wrap(xvar, width = chrnum) |> 
+        str_replace("\n", "<br>"))
+  }
+  if(nsize) {
+    xvar = case_when(nsize < 20 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize1}'>n={nsize}</span>"),
+                            nsize < 30 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize2}'>n={nsize}</span>"), 
+                            TRUE ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize3}'>n={nsize}</span>")
+                            )
+  }
+  xdat = xdat |> 
+    mutate(xvar = fct_reorder(xvar, xvar_num))
 }
   
 
@@ -95,25 +106,25 @@ generate_xvar = function(dat){
 prep_single = function(dat, var, order = FALSE, drop_na = TRUE){
   single = dat 
   if (drop_na) {
-    single = single %>% drop_na({{var}})
+    single = single |> drop_na({{var}})
   }
-  single = single %>%
-    count({{var}},.drop = TRUE) %>% 
+  single = single |>
+    count({{var}},.drop = TRUE) |> 
     mutate(yvar = n/sum(n) * 100,
            xvar = as_factor({{var}}),
            nsize = sum(n),
            nsize_raw = nrow(dat),
-           nsize_listwise = nrow(dat %>% drop_na({{var}})),
-           name = names(dat %>% select({{var}}))
+           nsize_listwise = nrow(dat |> drop_na({{var}})),
+           name = names(dat |> select({{var}}))
            #name = deparse(substitute(var)) 
-    ) %>% 
-    filter(yvar > 0) %>% 
-    generate_textlabs() %>% 
+    ) |> 
+    filter(yvar > 0) |> 
+    generate_textlabs() |> 
     impute_labs()
   if (order) {
-    single = single %>% mutate(xvar = fct_reorder(xvar, -n))
+    single = single |> mutate(xvar = fct_reorder(xvar, -n))
   }
-  single = single %>% 
+  single = single |> 
     mutate(subtitle = paste0("N=", nsize))
   return(single)
 }
@@ -121,38 +132,39 @@ prep_single = function(dat, var, order = FALSE, drop_na = TRUE){
 # Grouped data prep with or without total
 # var becomes zvar, grvar becomes xvar 
 prep_gr = function(dat, var, grvar, drop_na = TRUE,
-                   add_total = FALSE, lab_total = "ZČU"){
+                   add_total = FALSE, lab_total = "ZČU",
+                  x_wrap = TRUE, x_chrnum = uwb_vals$chrnum){
   groups = dat 
   if (drop_na) {
-    groups = groups %>% drop_na({{var}})
+    groups = groups |> drop_na({{var}})
   }
-  groups = groups %>%
-    group_by({{grvar}}) %>% 
-    count({{var}}, .drop = FALSE) %>% 
+  groups = groups |>
+    group_by({{grvar}}) |> 
+    count({{var}}, .drop = FALSE) |> 
     mutate(yvar = n/sum(n)*100,
-           xvarno = {{grvar}}
+           xvar_df = {{grvar}}
            #xvar = as.factor(paste0(str_wrap({{grvar}}, 25),"\nn=",sum(n))),
            )
   if (add_total) {
-    total = dat %>% drop_na({{var}})  %>% 
-      count({{var}}, .drop = FALSE) %>% 
+    total = dat |> drop_na({{var}})  |> 
+      count({{var}}, .drop = FALSE) |> 
       mutate(yvar = n/sum(n)*100,
              #xvar = as.factor(paste0(lab_total, "\nn=", sum(n))),
-             xvarno = lab_total)
+             xvar_df = lab_total)
     groups = bind_rows(groups, total)
   }
-  groups = groups %>% 
-    ungroup() %>% 
-    group_by(xvar) %>% 
-    filter(n>0) %>% 
-    mutate(name = names(dat %>% select({{var}})),
+  groups = groups |> 
+    ungroup() |> 
+    group_by(xvar) |> 
+    filter(n>0) |> 
+    mutate(name = names(dat |> select({{var}})),
            #name = deparse(substitute({{var}})),
            nsize = sum(n),
            zvar = {{var}}
-           ) %>%  
-    generate(xvar) %>% 
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+           ) |>  
+    generate_xvar(wrap = x_wrap, chrnum = x_chrnum) |> 
+    generate_textlabs() |> 
+    impute_labs() |> 
     ungroup() 
   #return(groups)
 }
@@ -163,32 +175,32 @@ prep_gr2 = function(dat, var, grvar, grvar2, drop_na = TRUE,
                     add_total = FALSE, lab_total = "ZČU"){
   groups = dat 
   if (drop_na) {
-    groups = groups %>% drop_na({{var}})
+    groups = groups |> drop_na({{var}})
   }
-  groups = groups %>% 
-    group_by({{grvar}},{{grvar2}}) %>% 
-    count({{var}},.drop=FALSE) %>% 
+  groups = groups |> 
+    group_by({{grvar}},{{grvar2}}) |> 
+    count({{var}},.drop=FALSE) |> 
     mutate(yvar=n/sum(n)*100,
            xvar = as.factor(paste0(str_wrap({{grvar}}, 25),"\nn=",sum(n))),
-           xvarno = {{grvar}},
+           xvar_df = {{grvar}},
            zvar = {{var}}, 
            zzvar = as.factor(paste0(str_wrap({{grvar2}}, 25),"\nn=",sum(n))),
            zzvarno = {{grvar2}},
            nsize = sum(n))
   if (add_total) {
-    total = prep_gr(dat = dat, var = {{var}}, grvar = {{grvar}}) %>% 
-      select(yvar, xvar, xvarno, zvar, nsize) %>% 
+    total = prep_gr(dat = dat, var = {{var}}, grvar = {{grvar}}) |> 
+      select(yvar, xvar, xvar_df, zvar, nsize) |> 
       mutate(#zzvar = xvar,
-             #zzvarno = xvarno,
+             #zzvarno = xvar_df,
              zzvar = as.factor(paste0(lab_total, "\nn=", nsize)),
              zzvarno = lab_total)
     groups = bind_rows(groups, total)
   }
-  groups = groups %>% 
-    mutate(name = names(dat %>% select({{var}}))) %>% 
+  groups = groups |> 
+    mutate(name = names(dat |> select({{var}}))) |> 
       #name = deparse(substitute(var)))
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+    generate_textlabs() |> 
+    impute_labs() |> 
     ungroup()
   #filter(yvar>0)
   #return(groups)
@@ -199,26 +211,26 @@ prep_gr2 = function(dat, var, grvar, grvar2, drop_na = TRUE,
 prep_mc = function(dat, vars=names(dat), chosen, drop_na = TRUE, order = FALSE) {
   mc = dat
   # if (drop_na) {
-  #   mc = mc %>% drop_na({{vars}})
+  #   mc = mc |> drop_na({{vars}})
   # }
-  mc = mc %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    group_by(name) %>% 
-    count(value,.drop = FALSE) %>%
+  mc = mc |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    group_by(name) |> 
+    count(value,.drop = FALSE) |>
     mutate(yvar = n/sum(n)*100,
            xvar = name,
            #nsize_raw=nrow(dat),
-           # nsize_listwise=nrow(dat %>% drop_na({{var}})),
-           nsize=sum(n)) %>% 
-    filter(yvar > 0) %>% 
-    ungroup() %>% 
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+           # nsize_listwise=nrow(dat |> drop_na({{var}})),
+           nsize=sum(n)) |> 
+    filter(yvar > 0) |> 
+    ungroup() |> 
+    generate_textlabs() |> 
+    impute_labs() |> 
     filter(value == chosen) 
     if (order) {
-      mc = mc %>% mutate(xvar = fct_reorder(xvar, -n))
+      mc = mc |> mutate(xvar = fct_reorder(xvar, -n))
     }
-  mc = try(mc %>% mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
+  mc = try(mc |> mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
   return(mc)
 }
 
@@ -228,59 +240,59 @@ prep_mc = function(dat, vars=names(dat), chosen, drop_na = TRUE, order = FALSE) 
 # dodelat drop_na
 prep_mc_gr = function(dat, vars=names(dat), grvar, chosen,  drop_na = TRUE, 
                       add_total = FALSE, lab_total = "ZČU") {
-  mc = dat %>% 
-    select(c({{grvar}}, all_of(vars))) %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    group_by(name, {{grvar}}) %>% 
-    count(value,.drop = FALSE) %>%
+  mc = dat |> 
+    select(c({{grvar}}, all_of(vars))) |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    group_by(name, {{grvar}}) |> 
+    count(value,.drop = FALSE) |>
     mutate(yvar = n/sum(n)*100,
            zvar = name,
            nsize = sum(n),
            xvar = paste0({{grvar}}, "\nn=", nsize),
-           xvarno = {{grvar}},) %>% 
-    filter(yvar > 0) %>% 
-    filter(value == chosen) %>% 
-    ungroup() %>% 
-    generate_textlabs() %>% 
+           xvar_df = {{grvar}},) |> 
+    filter(yvar > 0) |> 
+    filter(value == chosen) |> 
+    ungroup() |> 
+    generate_textlabs() |> 
     impute_labs()
   if (add_total) {
-    total = prep_mc(dat = dat, vars = vars, chosen = chosen, drop_na = drop_na) %>% 
+    total = prep_mc(dat = dat, vars = vars, chosen = chosen, drop_na = drop_na) |> 
       mutate(zvarno = lab_total, 
              zvar = paste0(lab_total, "\nn=", nsize))
-    mc = mc %>% bind_rows(total)
+    mc = mc |> bind_rows(total)
   }
-  mc = try(mc %>% mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
+  mc = try(mc |> mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
   return(mc)
 }
 
 # Prep MC data in long format, total + grouped by faculty
 prep_mc_long_faks = function(dat) {
-  groups_nsize = dat %>% 
-    select(ID) %>% 
-    unique() %>%
-    left_join(id_faks) %>% 
-    count(fak) %>% 
+  groups_nsize = dat |> 
+    select(ID) |> 
+    unique() |>
+    left_join(id_faks) |> 
+    count(fak) |> 
     rename(nsize = n)
     
-  groups = dat %>%
-    set_names(c("ID", "xvar")) %>%
-    left_join(id_faks) %>% 
-    group_by(fak) %>% 
-    count(xvar) %>% 
-    mutate(zvar = fak) %>% 
+  groups = dat |>
+    set_names(c("ID", "xvar")) |>
+    left_join(id_faks) |> 
+    group_by(fak) |> 
+    count(xvar) |> 
+    mutate(zvar = fak) |> 
     left_join(groups_nsize)
   
-  mc = dat %>% 
-    set_names(c("ID", "xvar")) %>%
-    count(xvar) %>% 
+  mc = dat |> 
+    set_names(c("ID", "xvar")) |>
+    count(xvar) |> 
     mutate(nsize = length(unique(dat$ID)),
-           zvar = "ZČU") %>%
-    bind_rows(groups) %>% 
+           zvar = "ZČU") |>
+    bind_rows(groups) |> 
     mutate(yvar = n/nsize * 100,
            name = names(dat)[2]
-    ) %>% 
-    filter(yvar > 0) %>% 
-    generate_textlabs() %>% 
+    ) |> 
+    filter(yvar > 0) |> 
+    generate_textlabs() |> 
     impute_labs() 
 }
 
@@ -288,37 +300,32 @@ prep_mc_long_faks = function(dat) {
 # Batteries data prep
 # Dat is wide data, it is pivoted longer inside the function
 
-prep_bat = function(dat, vars = names(dat), drop_na = TRUE, show_nsize = FALSE) {
-  #levels = dat %>% pull(vars[1]) %>% levels()
+prep_bat = function(dat, vars = names(dat), drop_na = TRUE, 
+                    x_wrap = TRUE, x_chrnum = uwb_vals$chrnum, x_nsize = FALSE) {
+  #levels = dat |> pull(vars[1]) |> levels()
   
-  bat = dat %>% 
+  bat = dat |> 
     pivot_longer(cols = all_of(vars)) 
   
   if (drop_na) {
-    bat = bat %>% drop_na(value)
+    bat = bat |> drop_na(value)
   }
   
-  bat = bat %>% 
-    group_by(name) %>% 
-    count(value,.drop = FALSE) %>%
+  bat = bat |> 
+    group_by(name) |> 
+    count(value,.drop = FALSE) |>
     mutate(yvar = n/sum(n)*100,
-           xvar = name,
+           xvar_df = name,
            zvar = value,
-           nsize = sum(n)) %>% 
-    filter(yvar > 0) %>% 
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+           nsize = sum(n)) |> 
+    filter(yvar > 0) |> 
+    generate_textlabs() |> 
+    impute_labs() |> 
     ungroup()  
   
-  bat = try(bat %>% mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
-  bat = bat %>% mutate(xvar = as.factor(xvar))
-  
-  if (show_nsize) {
-    bat = bat %>% 
-      rename(xvarno = xvar) %>% 
-      generate_xvar() 
-  }
-  
+  bat = try(bat |> mutate(xvar_df = lab), silent = T) #try to rename items with lab from codebook
+  bat = bat |> 
+    generate_xvar(wrap = x_wrap, chrnum = x_chrnum, nsize = x_nsize) 
   return(bat)
 }
 
@@ -328,53 +335,53 @@ prep_bat = function(dat, vars = names(dat), drop_na = TRUE, show_nsize = FALSE) 
 # xvar is names of battery item
 prep_bat_gr = function(dat, vars=names(dat), grvar, 
                        add_total = FALSE, lab_total = "ZČU") {
-  bat = dat %>% 
-    select(c({{grvar}}, all_of(vars))) %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    group_by(name, {{grvar}}) %>% 
-    count(value,.drop = FALSE) %>%
+  bat = dat |> 
+    select(c({{grvar}}, all_of(vars))) |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    group_by(name, {{grvar}}) |> 
+    count(value,.drop = FALSE) |>
     mutate(yvar = n/sum(n)*100,
            xvar = name,
            zvar = value,
            #nsize_raw=nrow(dat),
-           # nsize_listwise=nrow(dat %>% drop_na({{var}})),
+           # nsize_listwise=nrow(dat |> drop_na({{var}})),
            nsize = sum(n),
            zzvar = paste0({{grvar}}, "\nn=", nsize),
-           zzvarno = {{grvar}},) %>% 
-    filter(yvar > 0) %>% 
-    #ungroup() %>% 
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+           zzvarno = {{grvar}},) |> 
+    filter(yvar > 0) |> 
+    #ungroup() |> 
+    generate_textlabs() |> 
+    impute_labs() |> 
     ungroup()
   
   if (add_total) {
-    total = prep_bat(dat = dat, vars = vars) %>% 
+    total = prep_bat(dat = dat, vars = vars) |> 
       mutate(zzvarno = lab_total, 
              zzvar = paste0(lab_total, "\nn=", nsize))
-    bat = bat %>% bind_rows(total)
+    bat = bat |> bind_rows(total)
   }
   
-  bat = try(bat %>% mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
+  bat = try(bat |> mutate(xvar = lab), silent = T) #try to rename items with lab from codebook
   return(bat)
 }
 
 # Means of a battery
 mean_bat = function(dat, vars, round_places = 0,
                        na_lab = c("NA", "Bez odpovědi")) {
-  means = dat %>% 
-    select(all_of(vars)) %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    mutate(value_num = parse_number(value, na = na_lab)) %>% 
-    drop_na(value_num) %>%
-    group_by(name) %>% 
+  means = dat |> 
+    select(all_of(vars)) |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    mutate(value_num = parse_number(value, na = na_lab)) |> 
+    drop_na(value_num) |>
+    group_by(name) |> 
     summarise(yvar = mean(value_num, na.rm = T),
-              nsize = n()) %>% 
-    mutate(xvar = name) %>% 
-    generate_textlabs() %>% 
-    impute_labs() %>% 
+              nsize = n()) |> 
+    mutate(xvar = name) |> 
+    generate_textlabs() |> 
+    impute_labs() |> 
     mutate(labvar_full = round(yvar, round_places),
            labvar_single = as.character(labvar_full)
-    ) %>% 
+    ) |> 
     ungroup()
 }
 
@@ -382,52 +389,52 @@ mean_bat = function(dat, vars, round_places = 0,
 mean_bat_gr = function(dat, vars, grvar, round_places = 0,
                        add_total = FALSE, lab_total = "ZČU",
                        na_lab = c("NA", "Bez odpovědi")) {
-  means = dat %>% 
-    select(c({{grvar}}, all_of(vars))) %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    mutate(value_num = parse_number(as.character(value), na = na_lab)) %>% 
-    drop_na(value_num) %>% 
-    group_by(name, {{grvar}}) %>% 
+  means = dat |> 
+    select(c({{grvar}}, all_of(vars))) |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    mutate(value_num = parse_number(as.character(value), na = na_lab)) |> 
+    drop_na(value_num) |> 
+    group_by(name, {{grvar}}) |> 
     summarise(yvar = mean(value_num, na.rm = T),
-              nsize = n()) %>% 
+              nsize = n()) |> 
     mutate(labvar_full = round(yvar, round_places),
            xvar = paste0({{grvar}}, "\nn = ", nsize),
-           xvarno = {{grvar}},
-           zvar = name) %>% 
-    ungroup() %>% 
+           xvar_df = {{grvar}},
+           zvar = name) |> 
+    ungroup() |> 
     impute_labs()
   
   if (add_total) {
     total = mean_bat(dat = dat, vars = vars, round_places = round_places, 
-                     na_lab = na_lab) %>% 
-      #select(xvar, yvar, nsize, labvar_full) %>% 
+                     na_lab = na_lab) |> 
+      #select(xvar, yvar, nsize, labvar_full) |> 
       mutate(zvar = xvar,
              xvar = as.factor(paste0(lab_total, "\nN=", nsize)),
-             xvarno = lab_total)
+             xvar_df = lab_total)
     means = bind_rows(means, total)
     }  
 
-    means = try(means %>% mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
+    means = try(means |> mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
 }
 
 #DODELAT ADD_TOTAL
 mean_bat_gr2 = function(dat, vars, grvar, grvar2, round_places = 0,
                         na_lab = c("NA", "Bez odpovědi")) {
-  means = dat %>% 
-    select(c({{grvar}}, {{grvar2}}, all_of(vars))) %>% 
-    pivot_longer(cols = all_of(vars)) %>% 
-    mutate(value_num = parse_number(value, na = na_lab)) %>% 
-    drop_na(value_num) %>% 
-    group_by(name, {{grvar}}, {{grvar2}}) %>% 
+  means = dat |> 
+    select(c({{grvar}}, {{grvar2}}, all_of(vars))) |> 
+    pivot_longer(cols = all_of(vars)) |> 
+    mutate(value_num = parse_number(value, na = na_lab)) |> 
+    drop_na(value_num) |> 
+    group_by(name, {{grvar}}, {{grvar2}}) |> 
     summarise(yvar = mean(value_num, na.rm = T),
-              nsize = n()) %>% 
-    ungroup() %>% 
-    impute_labs() %>% 
+              nsize = n()) |> 
+    ungroup() |> 
+    impute_labs() |> 
     mutate(labvar_full = round(yvar, round_places),
            xvar = paste0({{grvar}}, "\nn=", nsize),
            zvar = {{grvar2}}
     ) 
-  #means = try(means %>% mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
+  #means = try(means |> mutate(zvar = lab), silent = T) #try to rename items with lab from codebook
 }
 
 
@@ -444,7 +451,7 @@ mean_bat_gr2 = function(dat, vars, grvar, grvar2, round_places = 0,
 #' @examples
 plot_lolli = function(dat, horiz = TRUE){
   if(horiz){
-    d = dat %>% mutate(xvar = fct_rev(xvar))
+    d = dat |> mutate(xvar = fct_rev(xvar))
     } else {
       d = dat
     }
@@ -479,7 +486,7 @@ plot_lolli = function(dat, horiz = TRUE){
 #' @examples
 plot_bar = function(dat, horiz = TRUE){
   if (horiz){
-    d=dat %>% mutate(xvar = fct_rev(xvar))
+    d=dat |> mutate(xvar = fct_rev(xvar))
     } else {
       d=dat
   }
@@ -504,7 +511,7 @@ plot_bar = function(dat, horiz = TRUE){
 # Plot stacked percentages by groupvar 
 plot_stack = function(dat, horiz=TRUE, wrap = FALSE){
   if (horiz){
-    dat = dat %>% mutate(xvar = fct_rev(xvar))
+    dat = dat |> mutate(xvar = fct_rev(xvar))
   }
   p = ggplot(dat,aes(y = yvar,x = xvar, fill = zvar )) +
     geom_bar(stat = "identity", width = 0.85,colour=uwb_vals$barcol,
@@ -573,10 +580,10 @@ plot_trend = function(dat) {
 
 plot_trend_gr = function(dat, total, add_points = TRUE) {
   if (missing(total)) { # Larger size of total points
-    ddat = dat %>% 
+    ddat = dat |> 
       mutate(pointsize = uwb_vals$pointsize)
   } else {
-    ddat = dat %>% 
+    ddat = dat |> 
       mutate(pointsize = case_when(zvar == total ~ uwb_vals$pointsize + 5,
                                    TRUE ~ uwb_vals$pointsize))
   }
@@ -601,77 +608,22 @@ plot_trend_gr = function(dat, total, add_points = TRUE) {
 }
 
 
-
-
-
-
-
-
-# plot_trend_gr = function(dat, total, overlap_fix = TRUE, overlap_diff = 1, add_points = TRUE) {
-#   if (missing(total)) { # Larger size of total points
-#     ddat = dat %>% 
-#     mutate(pointsize = uwb_vals$pointsize)
-#   } else {
-#     ddat = dat %>% 
-#       mutate(pointsize = case_when(zvar == total ~ uwb_vals$pointsize + 5,
-#                                    TRUE ~ uwb_vals$pointsize))
-#   }
-#   # Remove overlapping text labels 
-#   if (overlap_fix) {
-#     ddat = ddat %>%
-#     mutate(fixed = 0)
-#   for (i in rev(levels(as.factor(dat$zvar)))) {
-#     baseline = dat %>%
-#       filter(zvar == i) %>%
-#       rename(baseline = yvar) %>%
-#       select(baseline, xvar)
-# 
-#     ddat = ddat %>%
-#       left_join(baseline) %>%
-#       mutate(fixed = case_when(zvar == i ~ 1, fixed == 1 ~ 1),
-#              labvar_full = case_when(fixed == 1 ~ labvar_full,
-#                                      abs(baseline - yvar) < overlap_diff ~ NA,
-#                                      TRUE ~ labvar_full)) %>%
-#       select(!c(baseline))
-#     }
-#   }
-# 
-#   p = ggplot(ddat, aes(y = yvar, x = xvar, group = zvar, color = zvar )) +
-#     geom_line(size = 1, alpha = 1) + 
-#     scale_color_uwb("quali") +
-#     labs(y = "", x = "", color = "",
-#          title = dat$title[1],
-#          subtitle = dat$subtitle[1],
-#          caption = dat$caption[1]) +
-#     theme_uwb() 
-#     
-#   if (add_points) {
-#     p = p + geom_point(size = ddat$pointsize, alpha = 1) + 
-#       geom_text(aes(label = labvar_full), color = "white", size = uwb_vals$labsize) +
-#       guides(color = guide_legend(override.aes = list(size = 0.5*uwb_vals$pointsize))) 
-#   }
-#   
-#   return(p)
-# }
-
-
-
 # Bubbleplot = lolli plot without a stick and with jittered light grey values for faculties in the background
 plot_bubbles = function(dat, horiz = TRUE, total = "ZČU", diff = 10, 
                         seed = 123, jitter_wid = 0.1) {
   if(horiz){
-    d = dat %>% mutate(xvar = fct_rev(xvar))
+    d = dat |> mutate(xvar = fct_rev(xvar))
   } else {
     d = dat
   }
   # Add total value for reference to be able to highlight extreme values
-  d_ref = d %>% 
-    filter(zvar == "ZČU") %>% 
-    select(xvar, yvar) %>% 
+  d_ref = d |> 
+    filter(zvar == "ZČU") |> 
+    select(xvar, yvar) |> 
     rename(yvar_ref = yvar)
   
-  d = d %>% 
-    left_join(d_ref) %>% 
+  d = d |> 
+    left_join(d_ref) |> 
     mutate(alpha_color = ifelse(abs(yvar - yvar_ref) > diff & zvar != "ZČU" , 1, 0),
            alpha_grey = ifelse(abs(yvar - yvar_ref) <= diff & zvar != "ZČU" , 1, 0)
            )
@@ -679,7 +631,7 @@ plot_bubbles = function(dat, horiz = TRUE, total = "ZČU", diff = 10,
   # Delete overplotted text labels
   #all_labs = 
   
-  p = ggplot(d %>% filter(zvar == total), 
+  p = ggplot(d |> filter(zvar == total), 
              aes(y = yvar, x = xvar)) +
     # Grey midzone 
     geom_jitter(data = d, alpha = d$alpha_grey,
@@ -717,11 +669,11 @@ plot_bubbles = function(dat, horiz = TRUE, total = "ZČU", diff = 10,
 # hide_lab = do not show labels of small bumps
 # One ribbon is a polygon with lots of border points to be smooth
 plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
-  d = dat %>% 
+  d = dat |> 
     # Special vars for ggsankey
-    group_by(zvar) %>% 
+    group_by(zvar) |> 
     mutate(next_x = lead(xvar),
-           next_node = lead(zvar)) %>%
+           next_node = lead(zvar)) |>
     ungroup() 
     #relocate?
 
@@ -755,28 +707,28 @@ plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
           axis.text.y = element_blank())
   
   # Position of labels (inside ribbon boxes)
-  x_len = length(d$xvar %>% levels)
+  x_len = length(levels(d$xvar))
   
-  pos_label = ggplot_build(preplot) %>%
-    .$data %>%
-    .[[1]] %>%
-    filter(x %in% 1:x_len) %>% 
-    group_by(x, group) %>% 
+  pos_label = ggplot_build(preplot) |>
+    .$data |> 
+    .[[1]] |> 
+    filter(x %in% 1:x_len) |> 
+    group_by(x, group) |> 
     mutate(ypos = mean(y),
            ymin = min(y),
-           ymax = max(y)) %>% 
-    select(-y) %>% 
-    ungroup() %>% 
-    unique() %>% 
+           ymax = max(y)) |> 
+    select(-y) |> 
+    ungroup() |> 
+    unique() |> 
     left_join(tibble(x = 1:x_len, 
-                     xvar = levels(d$xvar))) %>% 
-    left_join(d %>% 
-                select(xvar, yvar, zvar, labvar) %>% 
+                     xvar = levels(d$xvar))) |> 
+    left_join(d |> 
+                select(xvar, yvar, zvar, labvar) |> 
                 rename(label = zvar))
   
   # Bar ends
-  bar_ends = pos_label %>% 
-    filter(x == 1 | x == x_len) %>% 
+  bar_ends = pos_label |> 
+    filter(x == 1 | x == x_len) |> 
     mutate(xmin = case_when(x == 1 ~ 0.75,
                             x == x_len ~ x_len - 0.1),
            xmax = case_when(x == 1 ~ 1.1,
@@ -786,8 +738,8 @@ plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
            )
   
   # Position of ribbon labels (annotation at the end of the ribbon)
-  last = bar_ends %>% 
-    filter(x == x_len) %>% 
+  last = bar_ends |> 
+    filter(x == x_len) |> 
     mutate(label = str_wrap(label, margin))
   
   # Final plot
@@ -810,7 +762,7 @@ plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
 #  hide_lab = 0.5
 # # plot_ribbon(xx, fill = uwb_scales$faks) 
 #   
-# dat = meandata %>% filter(str_detect(name, mean_vars[[7]])) %>% 
+# dat = meandata |> filter(str_detect(name, mean_vars[[7]])) |> 
 #   mutate(xvar = as.factor(xvar),
 #          labvar = round(yvar, 1))
 # 

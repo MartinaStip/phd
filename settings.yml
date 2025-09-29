@@ -1,0 +1,27 @@
+language: 
+  title-block-author-single: ""
+  title-block-author: ""
+
+lang: cs
+  
+fig-cap-location: top
+
+crossref:
+  fig-title: 'Graf' # works for figure titles
+  fig-prefix: 'Graf' # works for references in text
+  fig-labels: arabic
+
+toc: true
+toc-title: "Obsah"
+
+mainfont: "Franklin Gothic Book"
+boldfont: "Franklin Gothic Medium"
+italicfont: "Franklin Gothic Book Italic"
+sansfont: "Franklin Gothic Book"
+monofont: "Franklin Gothic Book"
+
+fontsize: 14pt # 12 for pdf
+papersize: a4
+geometry: top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, footskip=1.5cm
+
+editor: visual

@@ -41,15 +41,16 @@ uwb_vals = list(
   )
 
 # Default theme ----------------------------------------------------------------
+# I used to base it on theme_minimal, but it did not work together with element_markdown, theme_void is better as a starting point.
 theme_uwb = function(){ 
   # Font
   font = uwb_vals$font 
-  theme_minimal() %+replace%    #replace elements we want to change
+  theme_void() %+replace%    #replace elements we want to change
     theme(
       # Grid elements
-      panel.grid.major = element_blank(),    
-      panel.grid.minor = element_blank(),   
-      axis.ticks = element_blank(),        
+      #panel.grid.major = element_blank(),    
+      #panel.grid.minor = element_blank(),   
+      #axis.ticks = element_blank(),        
       # Axis lines + ticks
       axis.ticks.y = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize),
       axis.line.y = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize),
@@ -61,17 +62,50 @@ theme_uwb = function(){
       plot.title.position = "plot",
       plot.subtitle = element_textbox_simple(size = uwb_vals$tsize - 3, family = uwb_vals$font, hjust = 0),
       #plot.subtitle.position = "plot",
-      plot.caption=element_text(size=uwb_vals$tsize - 3, family = font, hjust = 0, lineheight = uwb_vals$lineheight),
+      plot.caption=element_textbox_simple(size=uwb_vals$tsize - 3, family = font, hjust = 0, lineheight = uwb_vals$lineheight),
       plot.caption.position = "plot",
       strip.text = element_text(size = uwb_vals$tsize, family = uwb_vals$font, margin = margin(b = 1.5)),
       #strip.text = element_textbox_simple(size = uwb_vals$tsize, family = uwb_vals$font, hjust = 0.5, lineheight = uwb_vals$lineheight), # This does not increase space for facet labels, use labeller = label_wrap_gen(multi_line = TRUE, width = 30) inside the facet_wrap()
-      axis.title = element_text(color = uwb_vals$axiscol, size = uwb_vals$tsize, family = font),
-      axis.text =  ggtext::element_markdown(size = uwb_vals$tsize, family = uwb_vals$font, lineheight = uwb_vals$lineheight),
+      axis.title = element_markdown(color = uwb_vals$axiscol, size = uwb_vals$tsize, family = font),
+      axis.text =  element_markdown(size = uwb_vals$tsize, family = uwb_vals$font, lineheight = uwb_vals$lineheight),
+      #axis.text.x =  ggtext::element_markdown(),  # the markdown only works when .x and .y are set explicitly here, the generic axis.text doesnt work.
       axis.text.y = ggtext::element_markdown(color = uwb_vals$axiscol)
     )
 }
 
-axis.text.x = ggtext::element_markdown()
+
+ #old theme based on theme_minimal
+# theme_uwb = function(){ 
+#   # Font
+#   font = uwb_vals$font 
+#   theme_minimal() %+replace%    #replace elements we want to change
+#     theme(
+#       # Grid elements
+#       panel.grid.major = element_blank(),    
+#       panel.grid.minor = element_blank(),   
+#       axis.ticks = element_blank(),        
+#       # Axis lines + ticks
+#       axis.ticks.y = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize),
+#       axis.line.y = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize),
+#       # Legend
+#       legend.position="bottom",
+#       legend.text = element_text(size = uwb_vals$tsize - 3, family = font),
+#       # Text elements
+#       plot.title = element_textbox_simple(size = uwb_vals$tsize + 3, family = uwb_vals$font, lineheight = uwb_vals$lineheight_tit),
+#       plot.title.position = "plot",
+#       plot.subtitle = element_textbox_simple(size = uwb_vals$tsize - 3, family = uwb_vals$font, hjust = 0),
+#       #plot.subtitle.position = "plot",
+#       plot.caption=element_text(size=uwb_vals$tsize - 3, family = font, hjust = 0, lineheight = uwb_vals$lineheight),
+#       plot.caption.position = "plot",
+#       strip.text = element_text(size = uwb_vals$tsize, family = uwb_vals$font, margin = margin(b = 1.5)),
+#       #strip.text = element_textbox_simple(size = uwb_vals$tsize, family = uwb_vals$font, hjust = 0.5, lineheight = uwb_vals$lineheight), # This does not increase space for facet labels, use labeller = label_wrap_gen(multi_line = TRUE, width = 30) inside the facet_wrap()
+#       axis.title = element_text(color = uwb_vals$axiscol, size = uwb_vals$tsize, family = font),
+#       axis.text =  element_text(size = uwb_vals$tsize, family = uwb_vals$font, lineheight = uwb_vals$lineheight),
+#       #axis.text.x =  ggtext::element_markdown(),  # the markdown only works when .x and .y are set explicitly here, the generic axis.text doesnt work.
+#       axis.text.y = ggtext::element_markdown(color = uwb_vals$axiscol)
+#     )
+# }
+
 
 # Horizontal theme (flipped axes) ----------------------------------------------
 theme_uwb_horiz = function() {
@@ -81,8 +115,8 @@ theme_uwb_horiz = function() {
       #panel.grid.major.x = element_blank(), 
       axis.line.x = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize),
       axis.line.y = element_blank(),
-      axis.text.y = element_text(color = "black"),
-      axis.text.x = element_text(color = uwb_vals$axiscol),
+      axis.text.y = element_markdown(color = "black"),
+      axis.text.x = element_markdown(color = uwb_vals$axiscol),
       axis.ticks.y = element_blank(),
       axis.ticks.x = element_line(color = uwb_vals$axiscol, linetype = "solid", linewidth = uwb_vals$linesize)
     )
