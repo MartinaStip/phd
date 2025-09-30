@@ -131,8 +131,12 @@ open = data %>%
   
 writexl::write_xlsx(list("open answers" = open), "data/phd_quali_data.xlsx") 
 
+# Cube data -----------------------------------------------------------------
+source("code/d_cube.R", encoding = "UTF-8")
+
+
 # Save -------------------------------------------------------------------------
-save(data, missing, codebook, open,
+save(data, missing, codebook, open, cube_phd,
      file = "data/data_phd.RData")
 
 

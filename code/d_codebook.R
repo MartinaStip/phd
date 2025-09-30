@@ -67,11 +67,13 @@ codebook = codebook %>%
                            name == "gender" ~ "Gender",
                            name == "form" ~ "Forma studia",
                            TRUE ~ label),
-         lab_orig = lab,
-         lab = str_remove(lab, "\\([^)]*\\)") %>% str_remove("\\."),
-         lab = case_when(name %in% c("study_8", "study_9") ~ paste0(lab, "*"),
+        subtitle = "",
+        caption = "",
+        lab_orig = lab,
+        lab = str_remove(lab, "\\([^)]*\\)") %>% str_remove("\\."),
+        lab = case_when(name %in% c("study_8", "study_9") ~ paste0(lab, "*"),
                          TRUE ~ lab),
-         lab_short = lab)
+        lab_short = lab)
 
 
 

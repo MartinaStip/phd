@@ -88,16 +88,17 @@ generate_xvar = function(dat, wrap = TRUE, chrnum = uwb_vals$chrnum, nsize = TRU
   if (wrap) {
     xdat = xdat |> 
       mutate(xvar = str_wrap(xvar, width = chrnum) |> 
-        str_replace("\n", "<br>"))
+        str_replace_all("\n", "<br>"))
   }
   if(nsize) {
-    xvar = case_when(nsize < 20 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize1}'>n={nsize}</span>"),
+    xdat = xdat |> 
+      mutate(xvar = case_when(nsize < 20 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize1}'>n={nsize}</span>"),
                             nsize < 30 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize2}'>n={nsize}</span>"), 
                             TRUE ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize3}'>n={nsize}</span>")
-                            )
+                            ))
   }
   xdat = xdat |> 
-    mutate(xvar = fct_reorder(xvar, xvar_num))
+    mutate(xvar = fct_reorder(xvar, xvar_nr))
 }
   
 
@@ -295,7 +296,6 @@ prep_mc_long_faks = function(dat) {
     generate_textlabs() |> 
     impute_labs() 
 }
-
 
 # Batteries data prep
 # Dat is wide data, it is pivoted longer inside the function
@@ -509,7 +509,7 @@ plot_bar = function(dat, horiz = TRUE){
 }
 
 # Plot stacked percentages by groupvar 
-plot_stack = function(dat, horiz=TRUE, wrap = FALSE){
+plot_stack = function(dat, horiz = TRUE){
   if (horiz){
     dat = dat |> mutate(xvar = fct_rev(xvar))
   }
@@ -531,11 +531,6 @@ plot_stack = function(dat, horiz=TRUE, wrap = FALSE){
     p = p + coord_flip() +
       theme_uwb_horiz() 
   }
-  
-  if (wrap){
-    p = p + scale_x_discrete(labels = label_wrap(uwb_vals$chrnum)) 
-  }
-  
   print(p)
 }
 
@@ -668,106 +663,106 @@ plot_bubbles = function(dat, horiz = TRUE, total = "ZČU", diff = 10,
 # Ribbon plot
 # hide_lab = do not show labels of small bumps
 # One ribbon is a polygon with lots of border points to be smooth
-plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
-  d = dat |> 
-    # Special vars for ggsankey
-    group_by(zvar) |> 
-    mutate(next_x = lead(xvar),
-           next_node = lead(zvar)) |>
-    ungroup() 
-    #relocate?
+# plot_ribbon = function(dat, space = 5, fill = uwb_scales$quali, margin = 15){
+#   d = dat |> 
+#     # Special vars for ggsankey
+#     group_by(zvar) |> 
+#     mutate(next_x = lead(xvar),
+#            next_node = lead(zvar)) |>
+#     ungroup() 
+#     #relocate?
 
-  # Space between ribbons
-  space = space
+#   # Space between ribbons
+#   space = space
   
-  preplot = ggplot() +
-    geom_sankey_bump(data = d, aes(x = xvar, 
-                                     node = zvar, 
-                                     fill = factor(zvar), 
-                                     group = zvar,
-                                     value = yvar, 
-                                     label = zvar, 
-                                     next_x = next_x, next_z = next_node),
-    space = space, color = "transparent", smooth = 15, 
-    #type = "alluvial"
-    type = "sankey"
-    #show.legend = F
-    ) +
-    geom_sankey_label(size = 3, color = "black") +
-    #scale_fill_uwb("quali") +
-    scale_fill_manual(values = fill) +
-    theme_uwb() +
-    labs(x = "", y = "", fill = "",
-         title = d$title[1],
-         subtitle = d$subtitle[1],
-         caption = d$caption[1]) +
-    theme(legend.position = "bottom") +
-    theme(axis.line.y = element_blank(), 
-          axis.ticks.y = element_blank(),
-          axis.text.y = element_blank())
+#   preplot = ggplot() +
+#     geom_sankey_bump(data = d, aes(x = xvar, 
+#                                      node = zvar, 
+#                                      fill = factor(zvar), 
+#                                      group = zvar,
+#                                      value = yvar, 
+#                                      label = zvar, 
+#                                      next_x = next_x, next_z = next_node),
+#     space = space, color = "transparent", smooth = 15, 
+#     #type = "alluvial"
+#     type = "sankey"
+#     #show.legend = F
+#     ) +
+#     geom_sankey_label(size = 3, color = "black") +
+#     #scale_fill_uwb("quali") +
+#     scale_fill_manual(values = fill) +
+#     theme_uwb() +
+#     labs(x = "", y = "", fill = "",
+#          title = d$title[1],
+#          subtitle = d$subtitle[1],
+#          caption = d$caption[1]) +
+#     theme(legend.position = "bottom") +
+#     theme(axis.line.y = element_blank(), 
+#           axis.ticks.y = element_blank(),
+#           axis.text.y = element_blank())
   
-  # Position of labels (inside ribbon boxes)
-  x_len = length(levels(d$xvar))
+#   # Position of labels (inside ribbon boxes)
+#   x_len = length(levels(d$xvar))
   
-  pos_label = ggplot_build(preplot) |>
-    .$data |> 
-    .[[1]] |> 
-    filter(x %in% 1:x_len) |> 
-    group_by(x, group) |> 
-    mutate(ypos = mean(y),
-           ymin = min(y),
-           ymax = max(y)) |> 
-    select(-y) |> 
-    ungroup() |> 
-    unique() |> 
-    left_join(tibble(x = 1:x_len, 
-                     xvar = levels(d$xvar))) |> 
-    left_join(d |> 
-                select(xvar, yvar, zvar, labvar) |> 
-                rename(label = zvar))
+#   pos_label = ggplot_build(preplot) |>
+#     .$data |> 
+#     .[[1]] |> 
+#     filter(x %in% 1:x_len) |> 
+#     group_by(x, group) |> 
+#     mutate(ypos = mean(y),
+#            ymin = min(y),
+#            ymax = max(y)) |> 
+#     select(-y) |> 
+#     ungroup() |> 
+#     unique() |> 
+#     left_join(tibble(x = 1:x_len, 
+#                      xvar = levels(d$xvar))) |> 
+#     left_join(d |> 
+#                 select(xvar, yvar, zvar, labvar) |> 
+#                 rename(label = zvar))
   
-  # Bar ends
-  bar_ends = pos_label |> 
-    filter(x == 1 | x == x_len) |> 
-    mutate(xmin = case_when(x == 1 ~ 0.75,
-                            x == x_len ~ x_len - 0.1),
-           xmax = case_when(x == 1 ~ 1.1,
-                            x == x_len ~ x_len + 0.25),
-           #ymin = yvar - 0.5 * n + 0.5 * space,
-           #ymax = yvar + 0.5 * n - 0.5 * space
-           )
+#   # Bar ends
+#   bar_ends = pos_label |> 
+#     filter(x == 1 | x == x_len) |> 
+#     mutate(xmin = case_when(x == 1 ~ 0.75,
+#                             x == x_len ~ x_len - 0.1),
+#            xmax = case_when(x == 1 ~ 1.1,
+#                             x == x_len ~ x_len + 0.25),
+#            #ymin = yvar - 0.5 * n + 0.5 * space,
+#            #ymax = yvar + 0.5 * n - 0.5 * space
+#            )
   
-  # Position of ribbon labels (annotation at the end of the ribbon)
-  last = bar_ends |> 
-    filter(x == x_len) |> 
-    mutate(label = str_wrap(label, margin))
+#   # Position of ribbon labels (annotation at the end of the ribbon)
+#   last = bar_ends |> 
+#     filter(x == x_len) |> 
+#     mutate(label = str_wrap(label, margin))
   
-  # Final plot
-  preplot + 
-    geom_rect(data = bar_ends, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-              fill = bar_ends$fill) +
-    geom_text(data = pos_label, aes(x = xvar, y = ypos, label = labvar), 
-              color = "white", size = 0.85 * uwb_vals$labsize) +
-    annotate("text", x = x_len + 0.35, y = last$ypos, label = last$label,
-             color = last$fill, size = uwb_vals$labsize, hjust = 0, lineheight = 0.75) + 
-    guides(fill = "none") +
-    coord_cartesian(clip = "off") +   # This allows text outside the panel
-    theme(plot.margin = unit(c(1, 0.6 * margin, 1, 0), "lines"),
-          plot.title = element_textbox_simple(margin = unit(c(0, -0.6 * margin, 1, 0), "lines") )) # negative right margin pushes text outward
-}
+#   # Final plot
+#   preplot + 
+#     geom_rect(data = bar_ends, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+#               fill = bar_ends$fill) +
+#     geom_text(data = pos_label, aes(x = xvar, y = ypos, label = labvar), 
+#               color = "white", size = 0.85 * uwb_vals$labsize) +
+#     annotate("text", x = x_len + 0.35, y = last$ypos, label = last$label,
+#              color = last$fill, size = uwb_vals$labsize, hjust = 0, lineheight = 0.75) + 
+#     guides(fill = "none") +
+#     coord_cartesian(clip = "off") +   # This allows text outside the panel
+#     theme(plot.margin = unit(c(1, 0.6 * margin, 1, 0), "lines"),
+#           plot.title = element_textbox_simple(margin = unit(c(0, -0.6 * margin, 1, 0), "lines") )) # negative right margin pushes text outward
+# }
 
 
-#  dat = prep_gr(cube, fakulta_studenta, grvar = ar) 
-#  space = 5
-#  hide_lab = 0.5
-# # plot_ribbon(xx, fill = uwb_scales$faks) 
-#   
-# dat = meandata |> filter(str_detect(name, mean_vars[[7]])) |> 
-#   mutate(xvar = as.factor(xvar),
-#          labvar = round(yvar, 1))
-# 
-# plot_ribbon(dat, fill = uwb_scales$quali, margin = 20) + 
-#   labs(title =" -- trends")
+# #  dat = prep_gr(cube, fakulta_studenta, grvar = ar) 
+# #  space = 5
+# #  hide_lab = 0.5
+# # # plot_ribbon(xx, fill = uwb_scales$faks) 
+# #   
+# # dat = meandata |> filter(str_detect(name, mean_vars[[7]])) |> 
+# #   mutate(xvar = as.factor(xvar),
+# #          labvar = round(yvar, 1))
+# # 
+# # plot_ribbon(dat, fill = uwb_scales$quali, margin = 20) + 
+# #   labs(title =" -- trends")
 
 
 
