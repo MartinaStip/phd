@@ -34,103 +34,196 @@ metadata-files:
 ```
 
 
-NEVÍM, JAK NALOŽIT S KVALI ANALÝZOU. UVAŽUJI O DVOU MOŽNOSTECH: BUĎ DÁVAT JEDNOTLIVÉ BODY DO PODKAPITOL, KE KTERÝM SE VZTAHUJÍ (STUDIUM, TVŮRČÍ ČINNOST, BEZPEČÍ A FINANCE). NEBO UDĚLAT SAMOSTATNOU KAPITOLU S KVALI ANALÝZOU A TAM DÁT VŠECHNO. STEJNĚ MI ALE NENÍ JASNÁ TA LOGIKA. NEJDŘÍV JEDNOTLIVÁ TÉMATA A PAK SILNÉ A SLABÉ STRÁNKY. A PAK JEŠTĚ PROGRAMY V ANGLIČTINĚ. PŘITOM SE TAM OBJEVUJÍ PODOBNÁ TÉMATA JAKO U ČESKÝCH. 
+NEVÍM, JAK NALOŽIT S KVALI ANALÝZOU. UVAŽUJI O DVOU MOŽNOSTECH: BUĎ DÁVAT JEDNOTLIVÉ BODY DO PODKAPITOL, KE KTERÝM SE VZTAHUJÍ (STUDIUM, TVŮRČÍ ČINNOST, BEZPEČÍ A FINANCE). NEBO UDĚLAT SAMOSTATNOU KAPITOLU S KVALI ANALÝZOU A TAM DÁT VŠECHNO. VÍC SE MI LÍBÍ TO PROVÁZAT V PODKAPITOLÁCH. ZKUSILA JSEM TO TAM ROZHODIT, I KDYŽ SE TÍM NARUŠILA NA PŮVODNÍ STRUKTURA KVALI ANALÝZY.
 
-NEBO KOMBINACE, ALE TO NECHCI ROZHODOVAT SAMA, KAM CO PATŘÍ: KONKRÉTNÍ TÉMATA DO PODKAPITOL A NA KONEC HLUBŠÍ REFLEXI.
+A NĚKTERÉ CITACE BYHC VYMAZALA, KDYŽ SE TAM JEN POŘÁD OPAKUJE TOTÉŽ JINÝMI SLOVY.
+
 
 
 # Úvod
 
-Toto je zpráva z pilotního šetření studujících v doktorských studijních programech. Dotázáni byli studující ve všech ročnících. Protože se jedná o první šetření svého druhu, zařadili jsme do dotazníku více prostoru pro otevřené odpovědi k jednotlivým tématickým blokům, aby se studující mohli vyjádřit vlastními slovy v případě, že by nabízené možnosti nepokrývaly všechny aspekty, které nám chtějí sdělit. Kvalitativní analýza těchto odpovědí je klíčovou součástí výsledků. Při jejich interpretaci je ale nutné mít na paměti, že vypisovat otevřený komentář vyžaduje větší úsilí, než vybrat z nabízených možností. Toto úsilí vyvinou zejména studující, kteří jsou s některým aspektem svého studia velmi nespokojeni, nebo mají naopak velkou motivaci něco pochválit.
+Toto je zpráva z pilotního šetření studujících v doktorských studijních programech, které proběhlo od května do srpna 2025. Dotázáni byli studující ve všech ročnících. Témata zahrnovala hodnocení podmínek studia, množství povinností, rozvoje svých kompetencí, podmínek pro tvůrčí činnost a další.
+
+Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili prostor pro otevřené odpovědi k jednotlivým tématickým blokům. Díky tomu se studující mohli vyjádřit vlastními slovy v případě, že by nabízené možnosti nepokrývaly všechny aspekty, které nám chtějí sdělit. Na konci dotazníku odpovídající navíc dostali možnost shrnout, co na svém studiu nejvíce oceňují, a co by naopak změnili. Kvalitativní analýza všech otevřených odpovědí je klíčovou součástí výsledků. Při jejich interpretaci je ale nutné mít na paměti, že vypisovat otevřený komentář vyžaduje větší úsilí, než vybrat z nabízených možností. Toto úsilí vyvinou zejména studující, kteří jsou s některým aspektem svého studia velmi nespokojeni, nebo mají naopak velkou motivaci něco pochválit.
 
 # Hlavní zjištění
 
+- Klíčová role školitelů jako samostatný bod? V pozitivním i negativním smyslu.
+
+- Doktorské studium je oceňováno zejména pro svobodu bádání, možnost rozvíjet vlastní výzkum. Studující si velmi cení, když mají dostatečnou podporu školitelů/školitelek, flexibility studijního plánu a otevřenosti k individuálním potřebám. 
+
+- Negativně hodnocená je slabá podpora pro osvojení akademických kompetencí, nejasné či proměnlivé požadavky, nerovnoměrná pracovní zátěž a nedostatečné finanční ohodnocení. Tyto aspekty vedou k nejistotě a snížené motivaci k dokončení studia. 
+
+- Problematické jevy, které ohrožují sociální bezpečí, se dějí velmi zřídka.  
 
 # Návranost šetření a charakteristika vzorku
 
-Šetření mělo bohužel velmi malou návratnost. Z 551 oslovených dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **14 %**. Je možné že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá fakt, že naprostá většina studujících neuvedla svůj studijní program. Další identifikační údaje (fakulta, gender) neuvedlo kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
+Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
 
 Otevřené komentáře k průběhu svého doktorského studia máme ze všech fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV (stejně jako je tomu u kvantitativních výsledků). 
 
+![](figs/response.png){#fig-response}
 
-# Hodnocení konkrétních aspektů studia 
+![](figs/response_fak.png){#fig-response_fak}
 
-## Charakteristika a podmínky studia a získávané kompetence
+![](figs/response_gender.png){#fig-response_gender}
+
+# Charakteristika a podmínky studia - kvanti výsledky
 
 ![](figs/study.png){#fig-study}
 
-![](figs/competence.png){#fig-competences}
-
 ![](figs/condition.png){#fig-condition}
 
-Z analýzy otevřených komentářů k těmto otázkám vyplývají následující zjištění.
+![](figs/competence.png){#fig-competences}
 
-### Didaktické nedostatky
-Studující upozorňují na nedostatečné vedení a nezájem některých školitelů, což vede k pocitu osamocenosti a demotivace. Častým problémem je nejasnost v požadavcích, měnící se podmínky zkoušek a dlouhé prodlevy ve zpětné vazbě. V některých případech je komunikace se školitelem dokonce vnímána jako hrubá či nedůstojná, což negativně ovlivňuje celou atmosféru pracoviště.
+![](figs/research.png){#fig-research}
+
+![](figs/finance.png){#fig-finance}
+
+# Kvali výsledky - rozlámené do co nejmenších tématických bloků
+Z analýzy otevřených komentářů vyplývají následující zjištění. 
+
+## Práce školitelů/školitelek a vyučujících
+Studující upozorňují na nedostatečné vedení a nezájem některých školitelů, což vede k pocitu osamocenosti a demotivace. Častým problémem je nejasnost v požadavcích, měnící se podmínky zkoušek a dlouhé prodlevy ve zpětné vazbě. V některých případech je komunikace se školitelem dokonce vnímána jako hrubá či nedůstojná, což negativně ovlivňuje celou atmosféru pracoviště. Na druhou stranu, pokud spolupráce se školitelem/školitelkou funguje, patří k nejvíce oceňovaným aspektům studia.
+
+Kritické komentáře:
 
 *Můj školitel na se mi nevěnuje, neustále mě přehlíží a cokoliv je důležitější než moje studium. Neustále mi mění požadavky zkoušek či nároky na publikace. Mnou poskytnutá práce na review je nechána bez povšimnutí a od školitele nemám tak téměř žádnou zpětnou vazbu. Na předem domluvené schůzky se kolikrát ani nedostavil bez jakékoliv omluvy. V podstatě studuji doktorské studium zcela sám.... Je to vyčerpávájící a demotivující.*
 
-*Dále by bylo určitě vhodné stanovit přesně kolik zkoušek a jaké publikační výsledky má student mít, protože pan školitel to určitě zcela náhodně a může zde tak docházet k diskriminaci. Někdo dostane zkoušky 3, jiný 5 a podobně. Pan školitel rovněž mění zadání zkoušky z jeho předmětů, takže student dělá 1 zkoušku třeba na 3-4x, což může být pro spoustu lidi velmi demotivující.*
+*Dále by bylo určitě vhodné stanovit přesně kolik zkoušek a jaké publikační výsledky má student mít, protože pan školitel to určuje zcela náhodně a může zde tak docházet k diskriminaci. Někdo dostane zkoušky 3, jiný 5 a podobně. Pan školitel rovněž mění zadání zkoušky z jeho předmětů, takže student dělá 1 zkoušku třeba na 3-4x, což může být pro spoustu lidi velmi demotivující.*
 
 *Systém kontroly a postupu tvorby disertační práce je zcela nepřiměřený. Je to myšleno tak, že moji práci školitel v podstatě ignoruje i když mu všechny podklady poskytnu včas i formou emailu s přílohou...*
 
-*Školitel se chová často velmi hrubě, kdy on je přeci ten nejchytřejší a všichni ostatní jsou hloupí. Přijde mi, že pod ním celá sekce a lidé v ní značně trpí, protože se s ním bojí jít do konfliktu nebo na tyto věci upozornit.*
-
 *Uvítal bych nastavení konkrétních termínů pro poskytování zpětné vazby k seminárním pracím; to v některých případech přesahuje měsíc a často až po opakovaném připomínání, což může působit demotivačně.*
 
-*Dále by mohl být lepší přístup školitele/školitelů, v mém případě si myslím, že téměř chybělo vedení, které bych od školitele očekával.
-Pedagogika na škole? těžko... motivace na phd? Žádná. Na této škole není motivace k výuce, sorry.*
+*Dále by mohl být lepší přístup školitele/školitelů, v mém případě si myslím, že téměř chybělo vedení, které bych od školitele očekával.*
 
-### Adaptace
-Začátky studia jsou často spojené s nedostatkem informací a orientace v akademickém prostředí. Studenti se musí spoléhat hlavně sami na sebe, nepociťují dost podpory. Přetížení fakultními povinnostmi ubírá čas na vlastní výzkum a disertační práci. Chybí také dlouhodobá koncepce doktorského vzdělávání.
+*Pedagogika na škole? těžko... motivace na phd? Žádná. Na této škole není motivace k výuce, sorry.*
+
+Pozitivní komentáře:
+
+*Nejvíce oceňuji čas, který mi věnuje moje vedoucí práce (školitelka)*
+
+*First and foremost, I really appreciate the collaboration with my supervisor. There were also a few other faculty members (secretary, former Ph.D. students, fellow Ph.D. students) who are very friendly, helpful, and reliable.*
+
+*I deeply appreciate the support and guidance from my supervisor, whose expertise has been invaluable in my academic progress. I am also grateful to my instructors and the university staff for their assistance and collaboration. Additionally, I am sincerely thankful to the Ministry of Education, Youth and Sport for providing the government scholarship that makes my doctoral studies possible.*
+
+*I love the help render to me by my supervisor and the entire staff of the fakulty.* 
+
+
+## Organizace studia a srozumitelné požadavky
+Studující kritizují nejasně komunikované požadavky a změny podmínek během studia.
+
+*Lepší by bylo neměnit podmínky k dizertaci během studia.*
+
+*Daleko lepší by měla být komunikace ohledně požadavků na studium - jaké publikace jakého charakteru jsou vyžadovány, a to zejména u časopiseckých publikací. V požadavcích (ze strany fakulty) není zakotveno nic o časopiseckých publikacích, ovšem "nepsaným pravidlem" je vyžadovat publikaci v impaktovaném časopise indexovaném ve WoS/Scopus. Nic proti tomuto požadavku nemám, neměl by být však pouze nepsaným pravidlem.* 
+
+Jako organizační selhání lze vnímat i nerovnoměrné pracovní zatěžování, na které si stěžují někteří studující.
+
+*5kr. za pedagogickou činnost je každému doktorandovi udělováno za zcela odlišnou angažovanost. Jednomu stačí připravit jednu přednášku, ale druhý musí připravit cvičení, přednášky, zkoušky lak odpřednášet a být u všech testů atd. Významný nepoměr.*
+
+*Pociťuji silně nerovnoměrné zatěžování doktorandů (někteří jsou přepracovaní, jiní naopak neochotní). Je to spíše způsobené samozřejmě přístupem. Pracovitost není oceňována ale spíše využívána.*
+
+*Lepší by mohla být komunikace, co přesně je po studentech požadováno k dokončení studia (různí lidé vám řeknou různé věci např. co se týče zahraniční stáže či požadované kvalitě konferencí/časopisů).*
+
+
+## Administrativa 
+Jako samostatné téma, na které jsme se explicitně neptali, se ukázala administrativní zátěž studujících. Někteří studující kritizují nadměrnou byrokracii, jiní naopak chvválí administrativní podporu studia. Je tedy zřejmé, že by bylo vhodné sdílet know how napříč pracovišti, aby bylo administrativní zajištění doktorského studia všude hladké.
+
+*Bylo by potřeba zlepšit komunikaci s administrativou a zjednodušit formuláře - online aplikace.*
+
+*Lepší koordinace studijního oddělení a katedry: každá strana má jiné požadavky, občas pro studenty matoucí. Jinak jsem se studiem spokojená, všichni mi vždy vyšli vstříc a podporovali mě ve všech nápadech, se kterými jsem přišla.*
+
+
+## Nedostatečná podpora akademických kompetencí
+Studium je zejména na začátku poznamenané špatnou orientací v nové akademické roli. Mnozí studující kritizují, že se musí spoléhat hlavně sami na sebe, nepociťují dost podpory. Některým chybí také dlouhodobá koncepce doktorského vzdělávání na jejich pracovištích. Přetížení fakultními povinnostmi ubírá čas na vlastní výzkum a disertační práci. 
 
 *Na začátku studia absentovaly informace, co to je OBD, RIV, apod. Člověk se postupně musel naučit plavat. Postupně je člověk zapojován do více a více fakultních aktivit, výuky apod., tak na samotnou disertační práci zbývá času velmi málo (zejména při dalších mimouniverzitních aktivitách).*
 
 *Bohužel to u nás to funguje tak, že student je nechán téměř zcela napospas a co si sám nezařídí, nevykomunikuje s ostatními pracovníky, tak to nemá. Školitel nás nechává zcela bez podpory. Jediné, kdy se nám věnuje je moment, když děláme nějakou část, která může být užitečná pro jeho firmu...*
 
-*Myslím, že na mém pracovišti a fakultě téměř neexistuje jakákoliv dlouhodobá koncepce Phd studia ani cíle výzkumu. Proto je každý doktorand zcela samostatná jednotka bez jakékoliv podpory nebo zadání.*
+*Představoval bych si větší strukturovanost doktorských předmětů, semináře týkající se publikační činnosti (jak fungují citace, časopisy, akademické prostředí, financování apod.).* 
 
-### Byrokracie a formalistní přístup (absence smysluplnosti) 
-Studující kritizují nadměrnou byrokracii a důraz na formální požadavky na úkor smysluplného výzkumu. Povinné normy (rozsah textu, citace, dílčí zkoušky) vnímají spíše jako překážku než přínos. Akademická kariéra je pro ně abstraktní, preferují komerčně využitelné kompetence.
+*Kompetence jsou rozvíjeny spíše mimochodem, než nějak systematicky. Do výuky byl člověk hozen stylem nauč se plavat. Kurzy pro pedagogické pracovníky ho minuly, a v nabídce se objevily až o rok později.*
+
+*Na druhou stranu se mi nelíbí obecná organizace, tzn. absence zaškolení (tisk, cesťáky, publikování, přístupy ...), absence zpětné vazby na kvalitu mé výuky.* 
 
 *Naopak mě trápí byrokratický a akademický proces, který vyžaduje splňovat určité normy na úkor výsledku práce (nucený počet stran práce, hodiny konzultací, nemožnost odchýlit se od tématu, fixace na správně udělané citace místo důrazu na praktickou aplikaci projektu). Ocenil bych více možností setkání se spolužáky, jednodušší zapojení se do grantů, abych nemusel tolik řešit zaměstnání.*
 
 *Nová koncepce dílčích doktorských zkoušek rovněž nevyhovuje, neboť vytváří dojem, že se klade větší důraz na vyhovění požadavkům zkoušejících, než na podporu vlastního výzkumného postupu*
 
+## Nekoncepčnost nebo špatná koncepce studia
+*Myslím, že na mém pracovišti a fakultě téměř neexistuje jakákoliv dlouhodobá koncepce Phd studia ani cíle výzkumu. Proto je každý doktorand zcela samostatná jednotka bez jakékoliv podpory nebo zadání.*
+
+*Dále jsem si musel sám vymyslet zadání DisP. Neexistuje žádný dlouhodobější směr výzkumu, proto na mojí DisP nikdo nenaváže a další doktorandi budou také zanecháni svému osudu (bez podpory a dokonce i bez zadání).* 
+
+## Preference praktických kompetencí
+Někteří studujících uvádí, že akademická kariéra je pro ně abstraktní, a preferují komerčně využitelné kompetence.
+
 *Mám nulovou motivaci ve studiu pokračovat, protože u firem je tento titul spíše nevýhoda než výhoda a v akademické kariéře pokračovat nechci, protože ta práce podle mě nemá žádný smysl (např. psaní hromady publikací, které nikdo nečte).*
 
 *Raději bych rozvíjel praktické komerční kompetence.*
 
+*Uvítal bych větší systémovou podporu pro doktorandy – ať už jde o financování a jasnější kariérní perspektivy. V některých případech také chybí koordinovanější školení v metodologii, pedagogice nebo v tzv. ""soft skills"", které jsou dnes pro akademické i mimoakademické prostředí velmi důležité.*
 
-## Tvůrčí činnost
 
-![](figs/research.png){#fig-research}
 
-Z analýzy otevřených komentářů k této baterii otázek vyplývá, že studující oceňují prostor pro badatelskou činnost. Slabinou však zůstává nejednotnost v požadavcích na výstupy a někdy obtížně splnitelné nároky.
 
-*Oceňuji možnost získat nové schopnosti, praxi v publikování. Lepší by mohla být komunikace, co přesně je po studentech požadováno k dokončení studia (různí lidé vám řeknou různé věci např. co se týče zahraniční stáže či požadované kvalitě konferencí/časopisů).*
+
+Z analýzy otevřených komentářů vyplývá, že studující oceňují prostor pro badatelskou činnost. Slabinou však zůstává nejednotnost v požadavcích na výstupy a někdy obtížně splnitelné nároky.
+
+*Oceňuji možnost získat nové schopnosti, praxi v publikování.*
 
 *S doktorským studiem jsem velmi spokojen. Jediné co se mi nelíbí je požadavek na splnění článků Q1, Q2. Pro některé doktorandy je velmi obtížné v dnešní době tento požadavek splnit.*
 
 
-## Sociální bezpečí a finanční zázemí
+## Sociální bezpečí
 
-VĚTŠINA LIDÍ NA OTÁZKU SOCIÁLNÍHO BEZPEČÍ VŮBEC NEODPOVĚDĚLA, TJ. NEDALI ANI NIC Z UVEDENÉHO. ASI SE JIM CELÝ TEN BLOK NECHTĚLO ČÍST. NEBO PROSTĚ PŘEHLÉDLI TO MOŽNOST NIC Z UVEDENÉHO. JE TŘEBA TO NĚJAK OŠETŘIT, BUĎ POČÍTAT PROCENTA Z CELKU, VČETNĚ TĚCH, KTEŘÍ NEODPOVĚDĚLI. NEBO UKÁZAT ABSOLUTNÍ ČETNOSTI. ZATÍM NECHÁVÁM PRO ILUSTRACI ZAVÁDĚJÍCÍ GRAF. JAK NALOŽIT S KVALI ANALÝZOU? 
+VĚTŠINA LIDÍ NA OTÁZKU SOCIÁLNÍHO BEZPEČÍ VŮBEC NEODPOVĚDĚLA, TJ. NEDALI ANI NIC Z UVEDENÉHO. ASI SE JIM CELÝ TEN BLOK NECHTĚLO ČÍST. NEBO PROSTĚ PŘEHLÉDLI TU MOŽNOST NIC Z UVEDENÉHO. JE TŘEBA TO NĚJAK OŠETŘIT, BUĎ POČÍTAT PROCENTA Z CELKU, VČETNĚ TĚCH, KTEŘÍ NEODPOVĚDĚLI. NEBO UKÁZAT ABSOLUTNÍ ČETNOSTI. ZATÍM NECHÁVÁM PRO ILUSTRACI ZAVÁDĚJÍCÍ GRAF. JAK NALOŽIT S KVALI ANALÝZOU? BYL TAM JEDEN KOMENTÁŘ, KTERÝ JE V TÉMATU MIMODIDAKTICKÉ VZTAHY. ZKUSILA JSEM TO JSEM NAPASOVAT
 
 ![](figs/situation.png){#fig-situation}
 
 
+## Mimodidaktické vztahy
+V otevřených komentářích se objevily konkrétní popisy problematických situací narušující sociální bezpečí.
+
+*Nulová pomoc od zkušenějších kolegů, absolutně netýmové a tím pádem i velmi neefektivní jednání. Takové jednání škodí jak příjemné pracovní atmosféře, tak celé fakultě. Mnoho procesů by bylo možné optimalizovat, pokud by se více spolupracovalo.*
+
+*Školitel se chová často velmi hrubě, kdy on je přeci ten nejchytřejší a všichni ostatní jsou hloupí. Přijde mi, že pod ním celá sekce a lidé v ní značně trpí, protože se s ním bojí jít do konfliktu nebo na tyto věci upozornit.*
+
+Z dalších komentářů na jiných místech dotazníku jednoznačně vyplývá, že kvalita vztahů na pracovišti (spolupráce s kolegy, přístup školitele k úspěchům doktorandů, vztah ke studujícím) hrají významnou roli. 
+
+*Nejvíce jsem se toho naučil od ostatních pracovníku na katedře se kterýma byla skvělá spolupráce. Ale pan školitel každý můj dílčí úspěch nebo publikaci mimo téma zlehčoval. Stejně tak zapojení v evropských projektech, které podle něj nemají smysl. Učení a vedení prací studentů mě baví, ale rozhodně po dokončení studia neplánuji zůstat na pracovišti, kde je můj školitel.*
+
+*Oceňuji mezioborové předměty a spolupráci.*
+
+*Oceňuji: různorodost práce, přátelské prostředí, ochotní kolegové*
+
+*Oceňuji, že mě výzkumní pracovníci přijali jako člena týmu.*
+
+*Oceňuji přátelskou atmosféru a své kolegy na pracovišti.*
+
+*Oceňuji začlenění na katedře, pracovní podmínky (kancelář), podpora kolegů.*
+
+
+## Finance
+
+Studující hodnotí finanční zajištění během studia jako nedostatečné i v otevřených komentářích a často ho dávají do souvislosti s nutností zaměstnání, které omezuje prostor pro výzkum. 
+
+*Co by se dalo zlepšit: finance*
+
+*Během doktorského studia je nutnost mít i zaměstnání, které je bohužel priorita z hlediska financí.*
+
+*Doufám, že se zlepší finanční situace v oblasti doktorandských stipendií. Přestože aktuálně nehrozí existenční riziko, bylo by žádoucí, aby se podmínky zlepšily. V opačném případě se stávají nutnými úvahy o práci na poloviční úvazek, což by mohlo vést k nedostatečnému času vyhrazenému pro výzkum. *
+
+*Lepší by bylo: vyšší finanční ohodnocení v rámci měsíčního pravidelného stipendia*
+
+*zlepšit by se mohlo financování (i retrospektivně u již studujících)*
+
+*While I am grateful for the opportunities, I think improvements could be made in the timely disbursement of scholarship funds to avoid financial uncertainties."*
+
+*One thing I feel is not enough for the students, especially who are married and has the responsibility of feeding his family and parents - it is financial coverage or stipend ....so you should improve it according the Market ...*
 
 
 
-# Celkové hodnocení - silné a slabé stránky doktorského studia  
 
-Z otevřených odpovědí vyplývá následující shrnutí toho, co studující na svých doktorských studiích oceňují, a co jim naopak přijde problematické.
-
-##  Silné stránky doktorského studia
-
-Doktorské studium je oceňováno zejména pro svobodu bádání, možnost rozvíjet vlastní výzkum. Studující si cení flexibility studijního plánu a otevřenosti k individuálním potřebám.  
-
-## Slabé stránky doktorského studia
-
-Nedostatečné finanční ohodnocení nutí studenty hledat další zaměstnání a omezuje prostor pro výzkum. Slabá systémová podpora, roztříštěná organizace a nejasné či proměnlivé požadavky vedou k nerovnoměrné zatěži doktorandů, nejistotě a snížené motivaci k dokončení studia. 

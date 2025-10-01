@@ -1,0 +1,805 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  czech,
+  14pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm,
+footskip=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Franklin Gothic Book}
+  \setsansfont[]{Franklin Gothic Book}
+  \setmonofont[]{Franklin Gothic Book}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\ifPDFTeX
+\else
+\babelfont{rm}[]{Franklin Gothic Book}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+% Set main sans-serif font with italic support
+\setsansfont{Franklin Gothic Book}[
+  ItalicFont = Franklin Gothic Book Italic,
+  BoldFont = Franklin Gothic Medium,
+  BoldItalicFont = Franklin Gothic Medium Italic
+]
+
+% Make Franklin Gothic the default family everywhere
+\renewcommand{\familydefault}{\sfdefault}
+
+% Headings
+\setkomafont{chapter}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{section}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subsection}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subsubsection}{\bfseries\fontspec{Franklin Gothic Medium}}
+
+% Title block
+\setkomafont{title}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{subtitle}{\bfseries\fontspec{Franklin Gothic Medium}}
+
+% Page headers and footers
+\setkomafont{pagehead}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{pagenumber}{\fontspec{Franklin Gothic Book}}
+
+% Captions
+\setkomafont{caption}{\bfseries\fontspec{Franklin Gothic Medium}}
+\setkomafont{captionlabel}{\bfseries\fontspec{Franklin Gothic Book}}
+\usepackage{caption}
+\captionsetup[figure]{skip=3pt}
+
+% TOC (use tocloft instead of KOMA fonts)
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\bfseries\fontspec{Franklin Gothic Medium}}
+\renewcommand{\cftsecfont}{\fontspec{Franklin Gothic Book}}
+\renewcommand{\cftsubsecfont}{\fontspec{Franklin Gothic Book}}
+
+% space between top of page and heading
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0pt}}
+\KOMAoption{captions}{tableheading,figureheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Obsah}
+\else
+  \newcommand\contentsname{Obsah}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Seznam obrázků}
+\else
+  \newcommand\listfigurename{Seznam obrázků}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Seznam tabulek}
+\else
+  \newcommand\listtablename{Seznam tabulek}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Graf}
+\else
+  \newcommand\figurename{Graf}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabulka}
+\else
+  \newcommand\tablename{Tabulka}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Výpis}
+\newcommand*\listoflistings{\listof{codelisting}{Seznam výpisů}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdfauthor={Martina Štípková; Gabriela Fatková; František Kalvas},
+  pdflang={cs},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{\includegraphics[width=7cm,height=\textheight,keepaspectratio]{odbor_kvality.png}\\
+\strut \\
+\strut \\
+\strut \\
+Šetření studujících v doktorských programech 2024/25}
+\author{Martina Štípková \and Gabriela Fatková \and František Kalvas}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Obsah}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\chapter{Úvod}\label{uxfavod}
+
+Toto je zpráva z pilotního šetření studujících v doktorských studijních
+programech, které proběhlo od května do srpna 2025. Dotázáni byli
+studující ve všech ročnících. Témata zahrnovala hodnocení podmínek
+studia, množství povinností, rozvoje svých kompetencí, podmínek pro
+tvůrčí činnost a další.
+
+Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili
+prostor pro otevřené odpovědi k jednotlivým tématickým blokům. Díky tomu
+se studující mohli vyjádřit vlastními slovy v případě, že by nabízené
+možnosti nepokrývaly všechny aspekty, které nám chtějí sdělit. Na konci
+dotazníku odpovídající navíc dostali možnost shrnout, co na svém studiu
+nejvíce oceňují, a co by naopak změnili. Kvalitativní analýza všech
+otevřených odpovědí je klíčovou součástí výsledků. Při jejich
+interpretaci je ale nutné mít na paměti, že vypisovat otevřený komentář
+vyžaduje větší úsilí, než vybrat z nabízených možností. Toto úsilí
+vyvinou zejména studující, kteří jsou s některým aspektem svého studia
+velmi nespokojeni, nebo mají naopak velkou motivaci něco pochválit.
+
+\chapter{Hlavní zjištění}\label{hlavnuxed-zjiux161tux11bnuxed}
+
+\begin{itemize}
+\item
+  Klíčovou roli v doktorském studiu hrají školitelé a školitelky.
+  Studující si velmi cení, když mají jejich dostatečnou podporu. Pokud
+  ale školící ososby ve své roli selhávají, je to pro studující velmi
+  demotivující. Pozitivní je, že studující, kteří jsou s prací svých
+  školících osob výrazně, jasně převažují.
+\item
+  Doktorské studium je oceňováno zejména pro svobodu bádání a možnost
+  rozvíjet vlastní výzkum. Studující také oceňují flexibilitu studijního
+  plánu, otevřenost k jejich individuálním potřebám a dobré zázemí a
+  vztahy na svém pracovišti.
+\item
+  Hůře hodnocené je množství povinností, slabá podpora pro osvojení
+  akademických kompetencí, nejasné či proměnlivé požadavky,
+  nespravedlivé rozdělení pracovní zátěžě a nedostatečné finanční
+  ohodnocení. Tyto aspekty vedou k nejistotě a snížené motivaci k
+  dokončení studia.
+\item
+  Problematické jevy, které ohrožují sociální bezpečí, se dějí velmi
+  zřídka.
+\end{itemize}
+
+\chapter{Návranost šetření a charakteristika
+vzorku}\label{nuxe1vranost-ux161etux159enuxed-a-charakteristika-vzorku}
+
+TĚCH 551 ADRES V EMAILU S DOTAZNÍKEM, KTERÉ ZJISTIL FRANTIŠEK OD PANA
+WIMMERA JE ASI DOST NADHODNOCENÉ ČÍSLO, BUDOU TAM I ADRESY LIDÍ, CO UŽ
+NESTUDUJÍ. NA STATISTIKÁCH MAJÍ LENKY 448 STUDUJÍCÍCH PHD KE KONCI
+PROSINCE 2025. VYTÁHLA JSEM Z KOSTKY STAV K POSLEDNÍMU KVĚTNU, COŽ CCA
+ODPOVÍDÁ ZADÁNÍ NAŠEHO VÝZKUMU A VYŠLO MI 411. PRACUJU S TÍM, ALE JEŠTĚ
+JE TŘEBA SI TO NECHAT ZKONTROLOVAT.
+
+Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří
+byli na konci května 2025 zapsáni v doktorských programech, dotazník
+alespoň částečně vyplnilo pouze \textbf{75 osob}, tj. \textbf{18 \%}. Je
+možné že za nízkou návraností stojí načasování šetření na konci
+akademického roku (květen -- srpen 2025). Dalším možným vysvětlením
+mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky
+byly definovány jako dobrovolné (odpovídající je mohli přeskočit).
+Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo
+spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu
+doktorských studujících na fakultách. Tomu odpovídá skutečnost, že
+naprostá většina studujících neuvedla svůj studijní program. Další
+klasifikační údaje (fakulta, gender) neuvedlo kolem 20 \%
+odpovídajících. Na věcné otázky velká většina odpověděla.
+
+Otevřené komentáře k průběhu svého doktorského studia máme ze všech
+fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV, což
+odpovídá tomu, že na této fakultě je nejvíce doktorských studujících.
+
+\begin{figure}[H]
+
+\caption{\label{fig-response}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/response.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-response_fak}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/response_fak.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-response_gender}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/response_gender.png}}
+
+}
+
+\end{figure}%
+
+\chapter{Charakteristika a podmínky studia - kvantitativní
+výsledky}\label{charakteristika-a-podmuxednky-studia---kvantitativnuxed-vuxfdsledky}
+
+\begin{figure}[H]
+
+\caption{\label{fig-study}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/study.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-condition}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/condition.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-competences}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/competence.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-research}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/research.png}}
+
+}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\caption{\label{fig-finance}}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figs/finance.png}}
+
+}
+
+\end{figure}%
+
+SEM BUĎ KOMPLET KVALI ANALÝZU, NEBO JI NAPORCOVAT A PŘIDAT KE KONKRÉTNÍM
+GRAFŮM. ZVÁŽILA BYCH OMEZENÍ POČTU CITACÍ, KDYŽ SE OBSAH PŘEKRÝVÁ. ZATÍM
+DÁVÁM TAK, JAK JE, ABYSME VIDĚLI, JAK DLOUHÉ TO VYJDE.
+
+\chapter{Kvalitativní výsledky}\label{kvalitativnuxed-vuxfdsledky}
+
+\section{Didaktické nedostatky}\label{didaktickuxe9-nedostatky}
+
+Studující upozorňují na nedostatečné vedení a nezájem některých
+školitelů, což vede k pocitu osamocenosti a demotivace. Častým problémem
+je nejasnost v požadavcích, měnící se podmínky zkoušek a dlouhé prodlevy
+ve zpětné vazbě. V některých případech je komunikace se školitelem
+dokonce vnímána jako hrubá či nedůstojná, což negativně ovlivňuje celou
+atmosféru pracoviště.
+
+\emph{Můj školitel na se mi nevěnuje, neustále mě přehlíží a cokoliv je
+důležitější než moje studium. Neustále mi mění požadavky zkoušek či
+nároky na publikace. Mnou poskytnutá práce na review je nechána bez
+povšimnutí a od školitele nemám tak téměř žádnou zpětnou vazbu. Na
+předem domluvené schůzky se kolikrát ani nedostavil bez jakékoliv
+omluvy. V podstatě studuji doktorské studium zcela sám\ldots. Je to
+vyčerpávájící a demotivující.}
+
+\emph{Dále by bylo určitě vhodné stanovit přesně kolik zkoušek a jaké
+publikační výsledky má student mít, protože pan školitel to určitě zcela
+náhodně a může zde tak docházet k diskriminaci. Někdo dostane zkoušky 3,
+jiný 5 a podobně. Pan školitel rovněž mění zadání zkoušky z jeho
+předmětů, takže student dělá 1 zkoušku třeba na 3-4x, což může být pro
+spoustu lidi velmi demotivující.}
+
+\emph{Systém kontroly a postupu tvorby disertační práce je zcela
+nepřiměřený. Je to myšleno tak, že moji práci školitel v podstatě
+ignoruje i když mu všechny podklady poskytnu včas i formou emailu s
+přílohou\ldots{} }
+
+\emph{Školitel se chová často velmi hrubě, kdy on je přeci ten
+nejchytřejší a všichni ostatní jsou hloupí. Přijde mi, že pod ním celá
+sekce a lidé v ní značně trpí, protože se s ním bojí jít do konfliktu
+nebo na tyto věci upozornit.}
+
+\emph{Uvítal bych nastavení konkrétních termínů pro poskytování zpětné
+vazby k seminárním pracím; to v některých případech přesahuje měsíc a
+často až po opakovaném připomínání, což může působit demotivačně.}
+
+\emph{Dále by mohl být lepší přístup školitele/školitelů, v mém případě
+si myslím, že téměř chybělo vedení, které bych od školitele očekával.}
+
+\emph{Pedagogika na škole? těžko\ldots{} motivace na phd? Žádná. Na této
+škole není motivace k výuce, sorry.}
+
+\section{Adaptace}\label{adaptace}
+
+Začátky studia jsou často spojené s nedostatkem informací a orientace v
+akademickém prostředí. Studenti se musí spoléhat hlavně sami na sebe,
+nepociťují dost podpory, ani jasné zadání. Přetížení fakultními
+povinnostmi ubírá čas na vlastní výzkum a disertační práci. Chybí také
+dlouhodobá koncepce doktorského vzdělávání.
+
+\emph{Na začátku studia absentovaly informace, co to je OBD, RIV, apod.
+Člověk se postupně musel naučit plavat. Postupně je člověk zapojován do
+více a více fakultních aktivit, výuky apod., tak na samotnou disertační
+práci zbývá času velmi málo (zejména při dalších mimouniverzitních
+aktivitách).}
+
+\emph{Bohužel to u nás to funguje tak, že student je nechán téměř zcela
+napospas a co si sám nezařídí, nevykomunikuje s ostatními pracovníky,
+tak to nemá. Školitel nás nechává zcela bez podpory. Jediné, kdy se nám
+věnuje je moment, když děláme nějakou část, která může být užitečná pro
+jeho firmu\ldots{}}
+
+\section{Byrokracie a formalistní přístup (absence
+smysluplnosti)}\label{byrokracie-a-formalistnuxed-pux159uxedstup-absence-smysluplnosti}
+
+Studující kritizují nadměrnou byrokracii a důraz na formální požadavky
+na úkor smysluplného výzkumu. Povinné normy (rozsah textu, citace, dílčí
+zkoušky) vnímají spíše jako překážka než přínos. Akademická kariéra je
+pro ně abstraktní, preferují komerčně využitelné kompetence.
+
+\emph{Naopak mě trápí byrokratický a akademický proces, který vyžaduje
+splňovat určité normy na úkor výsledku práce (nucený počet stran práce,
+hodiny konzultací, nemožnost odchýlit se od tématu, fixace na správně
+udělané citace místo důrazu na praktickou aplikaci projektu). Ocenil
+bych více možností setkání se spolužáky, jednodušší zapojení se do
+grantů, abych nemusel tolik řešit zaměstnání.}
+
+\emph{Nová koncepce dílčích doktorských zkoušek rovněž nevyhovuje, neboť
+vytváří dojem, že se klade větší důraz na vyhovění požadavkům
+zkoušejících, než na podporu vlastního výzkumného postupu}
+
+\emph{Mám nulovou motivaci ve studiu pokračovat, protože u firem je
+tento titul spíše nevýhoda než výhoda a v akademické kariéře pokračovat
+nechci, protože ta práce podle mě nemá žádný smysl (např. psaní hromady
+publikací, které nikdo nečte).}
+
+\emph{Raději bych rozvíjel praktické komerční kompetence.}
+
+\section{Tvůrčí činnost}\label{tvux16frux10duxed-ux10dinnost}
+
+Prostor pro badatelskou činnost oceňují, slabinou však zůstává
+nejednotnost v požadavcích na výstupy a někdy obtížně splnitelné nároky.
+
+\emph{Oceňuji možnost získat nové schopnosti, praxi v publikování. Lepší
+by mohla být komunikace, co přesně je po studentech požadováno k
+dokončení studia (různí lidé vám řeknou různé věci např. co se týče
+zahraniční stáže či požadované kvalitě konferencí/časopisů).}
+
+\emph{S doktorským studiem jsem velmi spokojen. Jediné co se mi nelíbí
+je požadavek na splnění článků Q1, Q2. Pro některé doktorandy je velmi
+obtížné v dnešní době tento požadavek splnit.}
+
+\section{Mimodidaktické vztahy}\label{mimodidaktickuxe9-vztahy}
+
+Kvalita vztahů na pracovišti (spolupráce s kolegy, přístup školitele k
+úspěchům doktorandů, vztah ke studujícím) hrají významnou roli.
+
+\emph{Nejvíce jsem se toho naučil od ostatních pracovníku na katedře se
+kterýma byla skvělá spolupráce. Ale pan školitel každý můj dílčí úspěch
+nebo publikaci mimo téma zlehčoval. Stejně tak zapojení v evropských
+projektech, které podle něj nemají smysl. Učení a vedení prací studentů
+mě baví, ale rozhodně po dokončení studia neplánuji zůstat na
+pracovišti, kde je můj školitel.}
+
+\emph{Oceňuji mezioborové předměty a spolupráci.}
+
+\emph{Oceňuji: různorodost práce, přátelské prostředí, ochotní kolegové}
+
+\emph{Oceňuji, že mě výzkumní pracovníci přijali jako člena týmu.}
+
+\emph{Oceňuji přátelskou atmosféru a své kolegy na pracovišti.}
+
+\emph{Oceňuji začlenění na katedře, pracovní podmínky (kancelář),
+podpora kolegů.}
+
+\emph{Nulová pomoc od zkušenějších kolegů, absolutně netýmové a tím
+pádem i velmi neefektivní jednání. Takové jednání škodí jak příjemné
+pracovní atmosféře, tak celé fakultě. Mnoho procesů by bylo možné
+optimalizovat, pokud by se více spolupracovalo.}
+
+\section{Silné stránky
+Ph.D.~studií}\label{silnuxe9-struxe1nky-ph.d.-studiuxed}
+
+Doktorské studium je oceňováno zejména pro svobodu bádání, možnost
+rozvíjet vlastní výzkum. Studenti si cení flexibility studijního plánu a
+otevřenosti k individuálním potřebám.
+
+\subsection{Svoboda bádání}\label{svoboda-buxe1duxe1nuxed}
+
+Na doktorském studiu nejvíce oceňuji možnost věnovat se hluboce jednomu
+odbornému tématu, samostatně bádat a zároveň se rozvíjet v analytickém i
+kritickém myšlení. Velmi přínosná je i spolupráce s vedoucím práce a
+kolegy z oboru, kteří poskytují nejen odbornou zpětnou vazbu, ale i
+motivaci k dalšímu růstu. Možnost účastnit se konferencí, prezentovat
+výsledky, publikovat a být součástí širší vědecké komunity považuji za
+zásadní součást doktorského vzdělávání.
+
+\emph{Oceňuji prostor pro realizaci výzkumu v mé vlastní oblasti zájmu.
+Časové nároky na projekty, výuku, akce jako DoD atp. tento prostor ale
+zmenšují.}
+
+\emph{Možnost realizovat vlastní nápady a výzkum je taky velmi
+podporována na naší katedře.}
+
+\emph{Možnost a podpora rozvíjet se v tom, co mě zajímá.}
+
+\emph{Nejvíce oceňuji přístup mého vedoucího, které po mě chce výstupy,
+ale po jejich splnění mám volnou ruku pro své doktorské studium, což ne
+u všech školitelů je zaručené.}
+
+\emph{Oceňuji volnost. Práce by měla být více provázána s tématem studia
+a měl by být větší tlak na termíny.}
+
+\subsection{Individuální přístup a
+flexibilita}\label{individuuxe1lnuxed-pux159uxedstup-a-flexibilita}
+
+Gen Z -- řeší slaďování a work-life balance v\,mnohem nižším věku než
+generace předešlé. Oceňuji flexibilitu studijního plánu a doby strávené
+na univerzitě.
+
+\emph{Oceňuji: přístup školitele a kolegů. Samozřejmě oceňuji
+flexibilitu (možnost práce z domova, snadná domluva s vedoucím), možnost
+vyjíždět na konference, do různých pracovišť a navazovat kontakty a
+sdílet výzkum s vědci (ale i s lidmi z praxe) s podobným zájmem.}
+
+\emph{Oceňuji perfektní práci studijního oddělení a že mi v průběhu roku
+nikdo nehází klacky pod nohy.}
+
+\emph{Celkově mi doktorské studium vyhovuje, ale nepovažuji za reálné
+jej stihnout v základní době studia - při plnění všech dalších
+povinností i snaze o rozumné živobytí. Kvalita doktorského studia se
+zásadně odvíjí od role školitele, jeho erudice i tématu a zejména jeho
+časových možností. Největším problémem pro mne bylo najít disertabilní
+téma, a dále najít dostatek času a motivace pro dokončení studia.}
+
+\emph{Nejvíce oceňuji čas, který mi věnuje moje vedoucí práce
+(školitelka)}
+
+\emph{Svoboda v časové organizaci. Flexibilitu oceňuji. Zlepšit by se
+mohlo týmové jednání.}
+
+\emph{Nelíbí se mi, že bych v rámci studia měl odjet na nějaký
+zahraniční pobyt.}
+
+\emph{Vstřícný přístup pracoviště, školitele a studijního oddělení}
+
+\emph{Oceňuji přístup katedry, školitele a laboratoře při praktickém
+výzkumu v rámci studia.}
+
+\emph{Oceňuji širokou škálu možností (výuka, podílení se na přípravě
+výukových materiálů, účast na propagačních akcích, atp., možnosti
+výjezdu do zahraničí, na stáže, konference, apod.).}
+
+\section{Slabé stránky
+Ph.D.~studií}\label{slabuxe9-struxe1nky-ph.d.-studiuxed}
+
+Nedostatečné finanční ohodnocení nutí studenty hledat další zaměstnání a
+omezuje prostor pro výzkum. Slabá systémová podpora, roztříštěná
+organizace a nejasné či proměnlivé požadavky vedou k nerovnoměrné zatěži
+doktorandů, nejistotě a snížené motivaci k dokončení studia.
+
+\subsection{Finance}\label{finance}
+
+\emph{Co by se dalo zlepšit: finance}
+
+\emph{Během doktorského studia je nutnost mít i zaměstnání, které je
+bohužel priorita z hlediska financí.}
+
+\emph{Doufám, že se zlepší finanční situace v oblasti doktorandských
+stipendií. Přestože aktuálně nehrozí existenční riziko, bylo by žádoucí,
+aby se podmínky zlepšily. V opačném případě se stávají nutnými úvahy o
+práci na poloviční úvazek, což by mohlo vést k nedostatečnému času
+vyhrazenému pro výzkum.}
+
+\emph{Lepší by bylo: vyšší finanční ohodnocení v rámci měsíčního
+pravidelného stipendia}
+
+\emph{zlepšit by se mohlo financování (i retrospektivně u již
+studujících)}
+
+\subsection{Podpora}\label{podpora}
+
+Uvítal bych větší systémovou podporu pro doktorandy -- ať už jde o
+financování a jasnější kariérní perspektivy. V některých případech také
+chybí koordinovanější školení v metodologii, pedagogice nebo v tzv.
+``\,``soft skills''\,``, které jsou dnes pro akademické i mimoakademické
+prostředí velmi důležité.
+
+\emph{Na druhou stranu se mi nelíbí obecná organizace, tzn. absence
+zaškolení (tisk, cesťáky, publikování, přístupy \ldots), absence zpětné
+vazby na kvalitu mé výuky. Dále jsem si musel sám vymyslet zadání DisP.
+Neexistuje žádný dlouhodobější směr výzkumu, proto na mojí DisP nikdo
+nenaváže a další doktorandi budou také zanecháni svému osudu (bez
+podpory a dokonce i bez zadání).}
+
+\emph{Představoval bych si větší strukturovanost doktorských předmětů,
+semináře týkající se publikační činnosti (jak fungují citace, časopisy,
+akademické prostředí, financování apod.).}
+
+\emph{Kompetence jsou rozvíjeny spíše mimochodem, než nějak
+systematicky. Do výuky byl člověk hozen stylem nauč se plavat. Kurzy pro
+pedagogické pracovníky ho minuly, a v nabídce se objevily až o rok
+později.}
+
+\subsection{Srozumitelnost}\label{srozumitelnost}
+
+Pociťuji silně nerovnoměrné zatěžování doktorandů (někteří jsou
+přepracovaní, jiní naopak neochotní). Je to spíše způsobené samozřejmě
+přístupem. Pracovitost není oceňována ale spíše využívána.
+
+\emph{Lepší koordinace studijního oddělení a katedry: každá strana má
+jiné požadavky, občas pro studenty matoucí. Jinak jsem se studiem
+spokojená, všichni mi vždy vyšli vstříc a podporovali mě ve všech
+nápadech, se kterými jsem přišla.}
+
+\emph{Bylo by potřeba zlepšit komunikaci s administrativou a zjednodušit
+formuláře - online aplikace.}
+
+\emph{Lepší by bylo neměnit podmínky k dizertaci během studia.}
+
+\emph{Daleko lepší by měla být komunikace ohledně požadavků na studium -
+jaké publikace jakého charakteru jsou vyžadovány, a to zejména u
+časopiseckých publikací. V požadavcích (ze strany fakulty) není
+zakotveno nic o časopiseckých publikacích, ovšem ``nepsaným pravidlem''
+je vyžadovat publikaci v impaktovaném časopise indexovaném ve
+WoS/Scopus. Nic proti tomuto požadavku nemám, neměl by být však pouze
+nepsaným pravidlem.}
+
+\emph{5kr. za pedagogickou činnost je každému doktorandovi udělováno za
+zcela odlišnou angažovanost. Jednomu stačí připravit jednu přednášku,
+ale druhý musí připravit cvičení, přednášky, zkoušky lak odpřednášet a
+být u všech testů atd. Významný nepoměr.}
+
+\section{Programy realizované
+v\,angličtině}\label{programy-realizovanuxe9-v-angliux10dtinux11b}
+
+\subsection{Podpora}\label{podpora-1}
+
+Největším kladem studia jsou vztahy se školiteli, vyzdvihovány jsou na
+prvním místě profesionální vlastnosti jako odbornost a jasné vedení,
+dále pak osobní kvality jako ochota, přátelskost a spolehlivost. Stejnou
+důležitost přisuzují studující i administrativnímu personálu svých
+pracovišť, kteří mohou kompenzovat nedostatky ve vztahu se školitelem.
+Studenti oceňují i finanční podporu ve formě stipendia.
+
+\emph{First and foremost, I really appreciate the collaboration with my
+supervisor. There were also a few other faculty members (secretary,
+former Ph.D.~students, fellow Ph.D.~students) who are very friendly,
+helpful, and reliable.}
+
+\emph{I deeply appreciate the support and guidance from my supervisor,
+whose expertise has been invaluable in my academic progress. I am also
+grateful to my instructors and the university staff for their assistance
+and collaboration. Additionally, I am sincerely thankful to the Ministry
+of Education, Youth and Sport for providing the government scholarship
+that makes my doctoral studies possible.}
+
+\emph{I really appreciated the help provided by the department staff,
+who did everything they could to compensate for the lack of
+communication with professors.}
+
+\emph{I love the help render to me by my supervisor and the entire staff
+of the fakulty.}
+
+\emph{Grateful for the state-of-the-art facilities that made the seminar
+both engaging and effective.}
+
+\subsection{Srozumitelnost}\label{srozumitelnost-1}
+
+V předávání informací studující vidí závažné systémové nedostatky.
+Uvítali by proaktivní poskytování informací o kurzech (forma, požadavky,
+jazyk výuky a materiálů). Studující v angličtině mají pocit nerovného
+přístupu k informacím, financování, projektům a plné formě výuky.
+Informační servis často poskytují schopní jednotlivci (administativní i
+akademičtí pracovníci), ale ne vždy jsou snadno zastupitelní.
+
+\emph{From my point of view, there should be more information passed on
+proactively to students. Especially in the second year, I had to ask for
+everything I wanted to know about the courses I signed up for. Will
+there be any lessons? Are they online or in person? What is required to
+pass the course? I had to e-mail professors and ask all these questions
+by myself. In all three courses I signed up for in the second year,
+there were no lessons. I was just given an assignment that I had to
+solve by myself without any prior teaching input.}
+
+\emph{Students who do not speak Czech have to struggle a bit (difficulty
+in accessing research funds, difficulty in being included in research
+projects, different treatment by some professors: this last point in
+particular was very relevant as the quality of teaching suffered greatly
+due to the reluctance to teach courses in English {[}but this may have
+been due to my not realising that the programme in English did not
+include courses{]})}
+
+\emph{I would improve access to courses, funding opportunities and
+research projects for non-Czech speakers. Otherwise, it should be
+clearly stated before enrolment that not all of the above is available
+in English.}
+
+\emph{Again, difficulties in communicating with professors influenced
+the skills I wanted to develop at UWB.}
+
+\emph{My supervisor is the most valuable person for my studies. I
+receive any information I would like to know about my studies from her.
+In the first year, I also received relevant administrative information
+about the study program from the Dean's secretary. However, she resigned
+and there was no one to substitute her one-by-one.}
+
+\subsection{Finance}\label{finance-1}
+
+Studující pociťují finanční těžkosti. Očekávají, že stipendium se bude
+blížit běžnému příjmu a nad současným stavem pociťují zklamání. (pouze 2
+odpovědi)
+
+\emph{While I am grateful for the opportunities, I think improvements
+could be made in the timely disbursement of scholarship funds to avoid
+financial uncertainties.}
+
+\emph{One thing I feel is not enough for the students, especially who
+are married and has the responsibility of feeding his family and parents
+- it is financial coverage or stipend \ldots.so you should improve it
+according the Market \ldots\ldots{} }
+
+\subsection{Sebevědomí}\label{sebevux11bdomuxed}
+
+(pouze 1 otevřená odpověď)
+
+\emph{I work at a German university that has a long partnership with ZCU
+and we do many Czech-German projects beyond my doctoral studies
+together. I developed the teaching competencies at my workplace at a
+German university. I developed my project management and administration
+skills, as well as the non-academic career development at my former and
+my current workplace.}
+
+
+
+
+\end{document}
