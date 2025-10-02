@@ -71,11 +71,23 @@ Otevřené komentáře k průběhu svého doktorského studia máme ze všech fa
 
 ![](figs/condition.png){#fig-condition}
 
+![](figs/info.png){#fig-info}
+
 ![](figs/competence.png){#fig-competences}
 
 ![](figs/research.png){#fig-research}
 
+
+## Sociální bezpečí a finance
+
 ![](figs/finance.png){#fig-finance}
+
+VĚTŠINA LIDÍ NA OTÁZKU SOCIÁLNÍHO BEZPEČÍ VŮBEC NEODPOVĚDĚLA, TJ. NEDALI ANI NIC Z UVEDENÉHO. ASI SE JIM CELÝ TEN BLOK NECHTĚLO ČÍST. NEBO PROSTĚ PŘEHLÉDLI TU MOŽNOST NIC Z UVEDENÉHO. TAK JSEM VZALA JAKO ZÁKLAD LIDI, KTEŘÍ DOŠLI V DOTAZNÍKU AŽ NA KONEC (N = 67). POD TÍM NECHÁVÁM PRO ILUSTRACI PŮVODNÍ GRAF, KTERÝ POČÍTÁ JEN S KOREKTNÍMI ODPOVĚĎMI (N = 12).
+
+![](figs/situation.png){#fig-situation}
+
+![](figs/situation_2.png){#fig-situation2}
+
 
 SEM BUĎ KOMPLET KVALI ANALÝZU, NEBO JI NAPORCOVAT A PŘIDAT KE KONKRÉTNÍM GRAFŮM. ZVÁŽILA BYCH OMEZENÍ POČTU CITACÍ, KDYŽ SE OBSAH PŘEKRÝVÁ. 
 ZATÍM DÁVÁM TAK, JAK JE, ABYSME VIDĚLI, JAK DLOUHÉ TO VYJDE.

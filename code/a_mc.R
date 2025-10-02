@@ -15,6 +15,12 @@ walk(allmissing, ~ data %>%
        nrow() %>% print()
      )
 
+# Situation needs another treatment, because very few Rs responded properly by choosing 
+# "none" opetion. I will use all Rs who completed questionnaire as a basis for percentages.
+allmissing$situation = data |> 
+  filter(Status.odpovědi == "dokončená") |> 
+  pull(Id.respondenta)
+
 # Data
 mcdata = map2(allmissing, mcvars, ~ 
                 prep_mc(data %>% filter(Id.respondenta %in% .x), 
@@ -28,7 +34,9 @@ mcdata = map2(allmissing, mcvars, ~
                        )
 )
 names(mcdata) = mcnames
-xx = mcdata[[1]]
+
+mcdata$situation = mcdata$situation |> 
+  filter(!str_detect(xvar, "Nic"))
 
 
 # Plots
