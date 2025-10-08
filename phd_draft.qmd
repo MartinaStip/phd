@@ -41,20 +41,34 @@ Toto je zpráva z pilotního šetření studujících v doktorských studijních
 
 Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili prostor pro otevřené odpovědi k jednotlivým tématickým blokům. Díky tomu se studující mohli vyjádřit vlastními slovy v případě, že by nabízené možnosti nepokrývaly všechny aspekty, které nám chtějí sdělit. Na konci dotazníku odpovídající navíc dostali možnost shrnout, co na svém studiu nejvíce oceňují, a co by naopak změnili. Kvalitativní analýza všech otevřených odpovědí je klíčovou součástí výsledků. Při jejich interpretaci je ale nutné mít na paměti, že vypisovat otevřený komentář vyžaduje větší úsilí, než vybrat z nabízených možností. Toto úsilí vyvinou zejména studující, kteří jsou s některým aspektem svého studia velmi nespokojeni, nebo mají naopak velkou motivaci něco pochválit.
 
-# Hlavní zjištění
+# Hlavní zjištění a doporučení
 
-- Klíčovou roli v doktorském studiu hrají školitelé a školitelky. Studující si velmi cení, když mají jejich dostatečnou podporu. Pokud ale školící ososby ve své roli selhávají, je to pro studující velmi demotivující. Pozitivní je, že studující, kteří jsou s prací svých školících osob výrazně, jasně převažují.
+- Klíčovou roli v doktorském studiu hrají školitelé a školitelky. Studující si velmi cení, když mají jejich dostatečnou podporu. Pokud ale školící ososby ve své roli selhávají, je to pro studující velmi demotivující. Pozitivní je, že studující, kteří jsou s prací svých školících osob spokojení, jasně převažují.
+
+
 
 - Doktorské studium je oceňováno zejména pro svobodu bádání a možnost rozvíjet vlastní výzkum. Studující také oceňují flexibilitu studijního plánu, otevřenost k jejich individuálním potřebám a dobré zázemí a vztahy na svém pracovišti. 
+
+DOPORUČENÍ: 
 
 - Hůře hodnocené je množství povinností, slabá podpora pro osvojení akademických kompetencí, nejasné či proměnlivé požadavky, nespravedlivé rozdělení pracovní zátěžě a nedostatečné finanční ohodnocení. Tyto aspekty vedou k nejistotě a snížené motivaci k dokončení studia. 
 
 - Problematické jevy, které ohrožují sociální bezpečí, se dějí velmi zřídka.   
 
+## Doporučení
+- **Zavést evaluační pohovor v polovině studia**. Cílem pohovoru by mělo být: 
+  - sledování progresu ve výzkumné i pedagogické činnosti studujících,
+  - evaluace zatížení povinnostmi v rámci doktorského studia,
+  - evaluace práce jejich školících osob,
+  - zmapování potřeb studujících pro předcházení neúspěšnosti studia, 
+  - monitoring potenciálního ohrožení sociálního bezpečí (v souladu se směrnicí rektora 12R/2025),
+  - hledání řešení případných zjištěných problémů. 
+  
+- **Zanést do studijních plánů více obsahu na podporu publikačních kompetencí**. Lze využít již existující aktivity UK ZČU a CŽV. Doporučujeme z jejich školení udělat povinnou součást doktorského studia. Podobně lze využít služby a školení UK ZČU a oblasti AI a jejího efektivního a etického využití ve výzkumu a výuce. 
+
+- **Zanést do studijních plánů více obsahu na podporu pedagogických kompetencí**, viz předchozí bod. 
+
 # Návranost šetření a charakteristika vzorku
-
-TĚCH 551 ADRES V EMAILU S DOTAZNÍKEM, KTERÉ ZJISTIL FRANTIŠEK OD PANA WIMMERA JE ASI DOST NADHODNOCENÉ ČÍSLO, BUDOU TAM I ADRESY LIDÍ, CO UŽ NESTUDUJÍ. NA STATISTIKÁCH MAJÍ LENKY 448 STUDUJÍCÍCH PHD KE KONCI PROSINCE 2025. VYTÁHLA JSEM Z KOSTKY STAV K POSLEDNÍMU KVĚTNU, COŽ CCA ODPOVÍDÁ ZADÁNÍ NAŠEHO VÝZKUMU A VYŠLO MI 411. PRACUJU S TÍM, ALE JEŠTĚ JE TŘEBA SI TO NECHAT ZKONTROLOVAT.
-
 Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
 
 Otevřené komentáře k průběhu svého doktorského studia máme ze všech fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV, což odpovídá tomu, že na této fakultě je nejvíce doktorských studujících. 
