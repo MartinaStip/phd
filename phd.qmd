@@ -15,12 +15,16 @@ format:
   # html:
   #  page-layout: full
   pdf:
-    # pdf-engine: lualatex
-    pdf-engine: xelatex
+    pdf-engine: lualatex
+    # pdf-engine: xelatex
     documentclass: scrreprt
+    #classoption: [czech]
     number-sections: true
     fig-pos: H
     include-in-header: settings_pdf.tex
+
+filters:
+  - vlnka.lua
 
 metadata-files: 
   - settings.yml
@@ -41,13 +45,13 @@ Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili p
 
 # Hlavní zjištění
 
-- Klíčovou roli v doktorském studiu hrají školitelé a školitelky. Studující si velmi cení, když mají jejich dostatečnou podporu. Pokud ale školící ososby ve své roli selhávají, je to pro studující velmi demotivující. Pozitivní je, že studující, kteří jsou s prací svých školících osob spokojení, jasně převažují.
+- Klíčovou roli v doktorském studiu hrají **školitelé a školitelky**. Studující si velmi cení, když mají jejich dostatečnou podporu. Pokud ale školící osoby ve své roli selhávají, je to pro studující velmi demotivující. Pozitivní je, že studující, kteří jsou s prací svých školících osob spokojení, jasně převažují.
 
-- Doktorské studium je oceňováno zejména pro svobodu bádání a možnost rozvíjet vlastní výzkum. Studující také oceňují flexibilitu studijního plánu, otevřenost k jejich individuálním potřebám a dobré zázemí a vztahy na svém pracovišti. 
+- Doktorské studium je oceňováno zejména pro **svobodu bádání** a možnost rozvíjet vlastní výzkum. Studující také oceňují **flexibilitu studijního plánu**, otevřenost k jejich **individuálním potřebám** a dobré **zázemí a vztahy na svém pracovišti**. 
 
-- Hůře hodnocené je množství povinností, slabá podpora pro osvojení akademických kompetencí, nejasné či proměnlivé požadavky, nespravedlivé rozdělení pracovní zátěžě a nedostatečné finanční ohodnocení. Tyto aspekty vedou k nejistotě a snížené motivaci k dokončení studia. 
+- Hůře hodnocené je **množství povinností**, slabá podpora pro osvojení **akademických kompetencí**, **nejasné či proměnlivé požadavky**, nespravedlivé **rozdělení pracovní zátěžě** a nedostatečné **finanční ohodnocení**. Tyto aspekty vedou k nejistotě a snížené motivaci k dokončení studia. 
 
-- Problematické jevy, které ohrožují sociální bezpečí, se dějí velmi zřídka.   
+- O problematických jevech, ohrožujících sociální bezpečí, referují odpovídající jen zřídka. Popisované zkušenosti jsou ale závažné.  
 
 # Doporučení
 - **Zavést evaluační pohovor v polovině studia**. Cílem pohovoru by mělo být: 
@@ -58,16 +62,19 @@ Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili p
   - monitoring potenciálního ohrožení sociálního bezpečí (v souladu se směrnicí rektora 12R/2025),
   - hledání řešení případných zjištěných problémů. 
   
-- **Zanést do studijních plánů více obsahu na podporu publikačních kompetencí**. Lze využít již existující aktivity UK ZČU a CŽV. Doporučujeme z jejich školení udělat povinnou součást doktorského studia. Podobně lze využít služby a školení UK ZČU a oblasti AI a jejího efektivního a etického využití ve výzkumu a výuce. 
+- **Zanést do studijních plánů více obsahu na podporu publikačních kompetencí**. Lze využít již existující aktivity UK ZČU a CŽV. Doporučujeme z jejich školení udělat povinnou součást doktorského studia. Podobně lze využít služby a školení UK ZČU v oblasti AI a jejího efektivního a etického využití ve výzkumu a výuce. 
 
-- **Zanést do studijních plánů více obsahu na podporu pedagogických kompetencí**, viz předchozí bod. 
+- **Zanést do studijních plánů více obsahu na podporu pedagogických kompetencí**. I v tomto případě lze využít již existující školení, viz předchozí bod. 
 
+- **Důsledně informovat studující o etických standardech**. Je to důležité pro všechny jejich role. Jako studující mohou být obětí neetického jednání (zejména školitelů nebo školitelek) a měli by ho umět rozpoznat a řešit. Pro pedagogickou a výzkumnou roli je důležitá prevence jejich vlastního neetického jednání.
 
-# Návranost šetření a charakteristika vzorku
+# Návratnost šetření a charakteristika vzorku
 
-Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
+Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné, že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo jen kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
 
-Otevřené komentáře k průběhu svého doktorského studia máme ze všech fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV (stejně jako je tomu u kvantitativních výsledků). 
+Otevřené komentáře k průběhu doktorského studia máme ze všech fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV (stejně jako je tomu u kvantitativních výsledků). 
+
+Rozložení vyplněných dotazníků kopíruje celkem spolehlivě rozložení doktorských studií na jednotlivých součástech. Výrazně slabší zpětnou vazbu vzhledem k početnímu zastoupení doktorských studií máme pouze z FF (15 % všech doktorských studií na ZČU, ve vyplněných dotaznících tvoří jen 5 %). Genderové rozložení vzorku taktéž odpovídá poměru mužů a žen v doktorských studijních programech na ZČU.
 
 ![](figs/response.png){#fig-response}
 
@@ -77,9 +84,9 @@ Otevřené komentáře k průběhu svého doktorského studia máme ze všech fa
 
 # Charakteristika a podmínky studia
 
-Celkově jsou studující spokojeni s průběhem studia, zejména s podporou svých školících osob i institucionální podporou, způsobem výuky. Velmi kladně hodnotí také zázemí pro práci a atmosféru na pracovišti (@fig-study). Pokud tyto aspekty studia fungují, jsou výslovně oceňované i v otevřených komentářích. A naopak: špatná práce školících osob či vyučujících, nebo nedostatek týmového ducha na pracovišti jsou uváděné jako zásadní problémy (viz [Práce školících osob a vyučujících]).
+Celkově jsou studující spokojeni s průběhem studia, zejména s podporou svých školících osob i institucionální podporou a způsobem výuky. Velmi kladně hodnotí také zázemí pro práci a atmosféru na pracovišti (@fig-study). Pokud tyto aspekty studia fungují, jsou výslovně oceňované i v otevřených komentářích. A naopak: špatná práce školících osob či vyučujících, nebo nedostatek týmového ducha na pracovišti jsou uváděné jako zásadní problémy (viz [Práce školících osob a vyučujících]).
 
-Hůře hodnocené je množství povinností (@fig-study). V otevřených komentářích se jako problematická někdy jeví srozumitelnost a stabilita požadavků [Organizace studia], nerovnoměrná pracovní zátěž studujících [Organizace studia], nadbytečná byrokracie [Administrativa] nebo [Nedostatečná podpora akademických kompetencí].
+Hůře hodnocené je množství povinností (@fig-study). V otevřených komentářích se jako problematická někdy jeví srozumitelnost a stabilita požadavků nerovnoměrná pracovní zátěž studujících (viz bod [Organizace studia]), nadbytečná byrokracie (viz bod [Administrativa]) nebo [Nedostatečná podpora akademických kompetencí].
 
 Pozitivní je, že velká většina studujících má motivaci studium dokončit (@fig-study).
 
@@ -114,10 +121,10 @@ Kritické komentáře:
 
 *Bohužel to u nás to funguje tak, že student je nechán téměř zcela napospas a co si sám nezařídí, nevykomunikuje s ostatními pracovníky, tak to nemá. Školitel nás nechává zcela bez podpory. Jediné, kdy se nám věnuje je moment, když děláme nějakou část, která může být užitečná pro jeho firmu...*
 
- *Nejvíce jsem se toho naučil od ostatních pracovníku na katedře se kterýma byla skvělá spolupráce. Ale pan školitel každý můj dílčí úspěch nebo publikaci mimo téma zlehčoval. Stejně tak zapojení v evropských projektech, které podle něj nemají smysl. Učení a vedení prací studentů mě baví, ale rozhodně po dokončení studia neplánuji zůstat na pracovišti, kde je můj školitel.*
+*Nejvíce jsem se toho naučil od ostatních pracovníku na katedře se kterýma byla skvělá spolupráce. Ale pan školitel každý můj dílčí úspěch nebo publikaci mimo téma zlehčoval. Stejně tak zapojení v evropských projektech, které podle něj nemají smysl. Učení a vedení prací studentů mě baví, ale rozhodně po dokončení studia neplánuji zůstat na pracovišti, kde je můj školitel.*
 
 ## Atmosféra na pracovišti
-Ještě pozitivnější zkušenost měli dotázaní s kvalitou vztahů na pracovišti (spolupráce s kolegy, přístup školitele k úspěchům doktorandů, vztah ke studujícím), a to jak pohledem kvantitativním (výrok “cítím se na pracovišti vítaný“), tak podle formulací otevřených komentářů. 
+Pozitivní zkušenost měli dotázaní s kvalitou vztahů na pracovišti (spolupráce s kolegy, přístup školitele k úspěchům doktorandů, vztah ke spolustudujícím), a to jak pohledem kvantitativním (výrok “cítím se na pracovišti vítaný“ -- viz @fig-study), tak podle formulací otevřených komentářů. 
 
 *Oceňuji mezioborové předměty a spolupráci.*
 
@@ -153,10 +160,8 @@ Jako samostatné téma, na které jsme se explicitně neptali, se ukázala admin
 *Lepší koordinace studijního oddělení a katedry: každá strana má jiné požadavky, občas pro studenty matoucí. Jinak jsem se studiem spokojená, všichni mi vždy vyšli vstříc a podporovali mě ve všech nápadech, se kterými jsem přišla.*
 
 
-
-
 ## Nedostatečná podpora akademických kompetencí
-Studium je zejména na začátku poznamenané špatnou orientací v nové akademické roli. Týká se to jak výzkumné (jak publikovat) tak pedagogické (jak učit) práce. Mnozí studující kritizují, že se musí spoléhat hlavně sami na sebe, nepociťují v těchto ohledech dost podpory. 
+Studium je zejména na začátku poznamenané špatnou orientací v nové akademické roli. Týká se to jak výzkumné tak pedagogické práce (tedy nejen jak publikovat, ale i jak učit). Mnozí studující kritizují, že se musí spoléhat hlavně sami na sebe, nepociťují v těchto ohledech dost podpory. 
 
 *Na začátku studia absentovaly informace, co to je OBD, RIV, apod. Člověk se postupně musel naučit plavat. Postupně je člověk zapojován do více a více fakultních aktivit, výuky apod., tak na samotnou disertační práci zbývá času velmi málo (zejména při dalších mimouniverzitních aktivitách).*
 
@@ -165,6 +170,7 @@ Studium je zejména na začátku poznamenané špatnou orientací v nové akadem
 *Kompetence jsou rozvíjeny spíše mimochodem, než nějak systematicky. Do výuky byl člověk hozen stylem nauč se plavat. Kurzy pro pedagogické pracovníky ho minuly, a v nabídce se objevily až o rok později.*
 
 *Na druhou stranu se mi nelíbí obecná organizace, tzn. absence zaškolení (tisk, cesťáky, publikování, přístupy ...), absence zpětné vazby na kvalitu mé výuky.* 
+
 
 ## Koncepce studia
 Některým studujícím chybí  dlouhodobá koncepce doktorského vzdělávání na jejich pracovištích. 
@@ -177,7 +183,8 @@ Některým studujícím chybí  dlouhodobá koncepce doktorského vzdělávání
 
 *Naopak mě trápí byrokratický a akademický proces, který vyžaduje splňovat určité normy na úkor výsledku práce (nucený počet stran práce, hodiny konzultací, nemožnost odchýlit se od tématu, fixace na správně udělané citace místo důrazu na praktickou aplikaci projektu).*
 
-## Vyváženost pracovního a soukromého života.
+
+## Vyváženost pracovního a soukromého života
 Studující si cení flexibility studijního plánu a otevřenosti k individuálním potřebám. Generace Z evidentně akcentuje slaďování pracovního a soukromého života v mnohem nižším věku než generace předešlé a pro některé studující je toto sladění velmi náročné
 
 *Oceňuji flexibilitu studijního plánu a doby strávené na univerzitě.*
@@ -192,15 +199,19 @@ Studující si cení flexibility studijního plánu a otevřenosti k individuál
 
 *Celkově mi doktorské studium vyhovuje, ale nepovažuji za reálné jej stihnout v základní době studia - při plnění všech dalších povinností i snaze o rozumné živobytí.*
 
+
 # Rozvíjené kompetence a tvůrčí činnost
 
-Z komentencí je nejlépe hodnocená oblast výzkumných kompetencí. Hůře rozvíjené jsou kompetence k administraci a řízení projektů a kariérní kompetence (zejména neakademické) - viz @fig-competence. V otevřených komentářích rezonovalo zejména oceňování svobody akademického bádání a náročnost plnění publikačních výstupů.
+Z kompentencí je nejlépe hodnocená oblast výzkumných kompetencí. Hůře rozvíjené jsou kompetence k administraci a řízení projektů a kariérní kompetence (zejména neakademické - viz @fig-competence). V otevřených komentářích rezonovalo zejména oceňování svobody akademického bádání a náročnost plnění publikačních výstupů.
 
 ![](figs/competence.png){#fig-competence}
 
 ![](figs/research.png){#fig-research}
 
+
 ## Svoboda bádání
+
+Prostor pro svobodnou realizaci vlastního výzkumu patří k nejvíce oceňovaným aspektům doktorského studia, které studující spontánně uváděli (společně s pochvalou práce školících osob - viz  [Práce školících osob a vyučujících]). 
 
 *Na doktorském studiu nejvíce oceňuji možnost věnovat se hluboce jednomu odbornému tématu, samostatně bádat a zároveň se rozvíjet v analytickém i kritickém myšlení. Velmi přínosná je i spolupráce s vedoucím práce a kolegy z oboru, kteří poskytují nejen odbornou zpětnou vazbu, ale i motivaci k dalšímu růstu. Možnost účastnit se konferencí, prezentovat výsledky, publikovat a být součástí širší vědecké komunity považuji za zásadní součást doktorského vzdělávání.*
 
@@ -212,13 +223,15 @@ Z komentencí je nejlépe hodnocená oblast výzkumných kompetencí. Hůře roz
 
 *Nejvíce oceňuji přístup mého vedoucího, které po mě chce výstupy, ale po jejich splnění mám volnou ruku pro své doktorské studium, což ne u všech školitelů je zaručené.* 
 
+
 ## Nároky na vědecké výstupy 
 
-Slabinou je v některých případech adekvátní komunikace publikačních požadavků a jejich náročnost. 
+Slabinou je v některých případech neadekvátní komunikace publikačních požadavků a jejich náročnost. 
 
 *Oceňuji možnost získat nové schopnosti, praxi v publikování. Lepší by mohla být komunikace, co přesně je po studentech požadováno k dokončení studia (různí lidé vám řeknou různé věci např. co se týče zahraniční stáže či požadované kvalitě konferencí/časopisů).*
 
 *S doktorským studiem jsem velmi spokojen. Jediné co se mi nelíbí je požadavek na splnění článků Q1, Q2. Pro některé doktorandy je velmi obtížné v dnešní době tento požadavek splnit.* 
+
 
 ## Preference praktických kompetencí
 Někteří studujících uvádí, že akademická kariéra je pro ně abstraktní, a preferují komerčně využitelné kompetence.
@@ -228,6 +241,7 @@ Někteří studujících uvádí, že akademická kariéra je pro ně abstraktn�
 *Raději bych rozvíjel praktické komerční kompetence.*
 
 *V některých případech také chybí koordinovanější školení v metodologii, pedagogice nebo v tzv. ""soft skills"", které jsou dnes pro akademické i mimoakademické prostředí velmi důležité.*
+
 
 # Sociální bezpečí
 

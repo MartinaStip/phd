@@ -8,4 +8,5 @@ where s.stav = 'S'
     and s.vykazovan_student = 'A' 
     and o.vykazovan_obor = 'A' 
     and o.typ = 'Doktorský'
-    and t.datum = TO_DATE('2025-05-31', 'YYYY-MM-DD');
+    and t.datum = TO_DATE('2025-05-31', 'YYYY-MM-DD')
+    and idk_prijezd is null;

@@ -92,9 +92,9 @@ generate_xvar = function(dat, wrap = TRUE, chrnum = uwb_vals$chrnum, nsize = TRU
   }
   if(nsize) {
     xdat = xdat |> 
-      mutate(xvar = case_when(nsize < 20 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize1}'>n={nsize}</span>"),
-                            nsize < 30 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize2}'>n={nsize}</span>"), 
-                            TRUE ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize3}'>n={nsize}</span>")
+      mutate(xvar = case_when(nsize < 20 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize1}'>n = {nsize}</span>"),
+                            nsize < 30 ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize2}'>n = {nsize}</span>"), 
+                            TRUE ~ glue("{xvar}<br><span style = 'color:{uwb_vals$c_nsize3}'>n = {nsize}</span>")
                             ))
   }
   xdat = xdat |> 

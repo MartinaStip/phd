@@ -3,7 +3,8 @@ language:
   title-block-author: ""
 
 lang: cs
-  
+#babel-lang: czech
+
 fig-cap-location: top
 
 crossref:
