@@ -51,7 +51,7 @@ Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili p
 
 - Hůře hodnocené je **množství povinností**, slabá podpora pro osvojení **akademických kompetencí**, **nejasné či proměnlivé požadavky**, nespravedlivé **rozdělení pracovní zátěžě** a nedostatečné **finanční ohodnocení**. Tyto aspekty vedou k nejistotě a snížené motivaci k dokončení studia. 
 
-- O problematických jevech, ohrožujících sociální bezpečí, referují odpovídající jen zřídka. Popisované zkušenosti jsou ale závažné.  
+- O problematických jevech, ohrožujících **sociální bezpečí**, referují odpovídající jen **zřídka**. Popisované zkušenosti jsou ale **závažné**.  
 
 # Doporučení
 - **Zavést evaluační pohovor v polovině studia**. Cílem pohovoru by mělo být: 
@@ -70,7 +70,7 @@ Jedná se o první šetření svého druhu, proto jsme do dotazníku zařadili p
 
 # Návratnost šetření a charakteristika vzorku
 
-Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné, že za nízkou návraností stojí načasování šetření na konci akademického roku (květen -- srpen 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo jen kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
+Šetření mělo bohužel velmi malou návratnost. Z 411 studujících, kteří byli na konci května 2025 zapsáni v doktorských programech, dotazník alespoň částečně vyplnilo pouze **75 osob**, tj. **18 %**. Je možné, že za nízkou návraností stojí načasování šetření na konci akademického roku (od května do srpna 2025). Dalším možným vysvětlením mohou být obavy dotazovaných z poskytování zpětné vazby. Všechny otázky byly definovány jako dobrovolné (odpovídající je mohli přeskočit). Přesto se ale mohli obávat, že by si vedení jejich pracoviště dokázalo spojit odpovědi s jejich osobou, už jen kvůli celkově malému počtu doktorských studujících na fakultách. Tomu odpovídá skutečnost, že naprostá většina studujících neuvedla svůj studijní program. Další klasifikační údaje (fakulta, gender) neuvedlo jen kolem 20 % odpovídajících. Na věcné otázky velká většina odpověděla.
 
 Otevřené komentáře k průběhu doktorského studia máme ze všech fakult kromě FPR. Nejsilnější nestrukturovaná zpětná vazba je z FAV (stejně jako je tomu u kvantitativních výsledků). 
 
